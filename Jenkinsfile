@@ -17,12 +17,12 @@ pipeline {
                 
                 script{
                     def a=0
-                    bat 'docker build . -f dockerfile.txt -t  webJewelreportback'
+                    bat 'docker build . -f dockerfile.txt -t  webjewelreportback'
                     a=1
                     if(a>0)
                     {
-                         bat 'docker stop  webJewelreportback'
-                         bat 'docker rm  webJewelreportback'
+                         bat 'docker stop  webjewelreportback'
+                         bat 'docker rm  webjewelreportback'
                     }
                 }
                 echo 'Docker Image done'
@@ -31,7 +31,7 @@ pipeline {
         stage('Docker Run') {
             steps {
                 script{
-                    bat 'docker run -p 5000:5000 -d --name  webJewelreportback  webJewelreportback'
+                    bat 'docker run -p 5000:5000 -d --name  webjewelreportback  webjewelreportback'
                 }
                 echo 'Docker Running'
             }
