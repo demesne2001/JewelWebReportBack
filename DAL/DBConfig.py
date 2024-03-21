@@ -11,9 +11,9 @@ password=config("DBPass")
 
 print(server)
 version='18'
-WRconnection = (
-    f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
-
+# WRconnection = (
+#     f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
+WRconnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
 class Connection(Enum):
     LiveConnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
     Connection=(f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
@@ -34,7 +34,7 @@ def Commandparam(input):
     print(input)
     
 
-def ExecuteDataReader(param,spname,MethodNname):
+def ExecuteDataReader(param,spname,MethodNname):    
     key_value_pairs=[]
     drivers = [item for item in pyodbc.drivers()]    
     connection=pyodbc.connect(DBConfig.WRconnection)
@@ -42,9 +42,11 @@ def ExecuteDataReader(param,spname,MethodNname):
         cursor=connection.cursor()        
         cursor.execute(f"EXEC {spname} {param}")
         columns = [column[0] for column in cursor.description]
-        rows = cursor.fetchall()        
+        rows = cursor.fetchall()    
+        print(rows)    
         for row in rows:
             key_value_pairs.append(dict(zip(columns, row)))
+        print(key_value_pairs)
         cursor.close()
         connection.close()
     except Exception as e:
@@ -54,32 +56,32 @@ def ExecuteDataReader(param,spname,MethodNname):
         connection.close()
     return key_value_pairs
 
-def ExecuteDataReader(param,spname,MethodNname,Result2):
-    key_value_pairs=[]
-    drivers = [item for item in pyodbc.drivers()]    
-    connection=pyodbc.connect(DBConfig.WRconnection)
-    try:
-        cursor=connection.cursor()        
-        cursor.execute(f"EXEC {spname} {param}")
-        columns = [column[0] for column in cursor.description]
-        rows = cursor.fetchall()        
-        for row in rows:
-            key_value_pairs.append(dict(zip(columns, row)))
+# def ExecuteDataReader(param,spname,MethodNname,Result2):
+#     key_value_pairs=[]
+#     drivers = [item for item in pyodbc.drivers()]    
+#     connection=pyodbc.connect(DBConfig.WRconnection)
+#     try:
+#         cursor=connection.cursor()        
+#         cursor.execute(f"EXEC {spname} {param}")
+#         columns = [column[0] for column in cursor.description]
+#         rows = cursor.fetchall()        
+#         for row in rows:
+#             key_value_pairs.append(dict(zip(columns, row)))
             
-        while True:
-            Result2=cursor.fetchall()
-            if cursor.nextset()==False:
-                break
-        cursor.close()
-        connection.close()
-    except Exception as e:
-        print(MethodNname + 'Error :- ',e)
-        print('SQL Query',f"EXEC {spname} {param}")
-        print('driver',drivers)
-        connection.close()
-    return key_value_pairs
+#         while True:
+#             Result2=cursor.fetchall()
+#             if cursor.nextset()==False:
+#                 break
+#         cursor.close()
+#         connection.close()
+#     except Exception as e:
+#         print(MethodNname + 'Error :- ',e)
+#         print('SQL Query',f"EXEC {spname} {param}")
+#         print('driver',drivers)
+#         connection.close()
+#     return key_value_pairs
 
-def ExecuteDataReader(param,spname,MethodNname,Connections):
+# def ExecuteDataReader(param,spname,MethodNname,Connections):
     key_value_pairs=[]
     drivers = [item for item in pyodbc.drivers()]    
     connection=pyodbc.connect(DBConfig.WRconnection)

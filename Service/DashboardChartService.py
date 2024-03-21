@@ -9,6 +9,7 @@ def GetBranchWise(input:CardandChartInput):
         param=DBConfig.CommonParam(input)
         result.lstResult=DBConfig.ExecuteDataReader(param,"","")
     except  Exception as E:
+        print(E)
         result.HasError=True
         result.Message.append(E)
     return result 
