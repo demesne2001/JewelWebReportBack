@@ -105,7 +105,7 @@ def ExecuteDataReader(param,spname,MethodNname):
 def CommonParam(input:CardandChartInput):
     param=""
     if(input.strBranch!=''):
-        param +=f" @strBranch='{input.strBranch}',"
+        param +=f" @strBranchID='{input.strBranch}',"
     if(input.strTeamModeofSale!=''):
         param +=f" @strTeamModeofSale='{input.strTeamModeofSale}',"  
     if(input.strCity!=''):
@@ -119,11 +119,11 @@ def CommonParam(input:CardandChartInput):
     if(input.ToDate!=''):
         param +=f" @ToDate='{input.ToDate}',"
     if(input.strItem!=''):
-        param +=f" @strItem='{input.strItem}',"
+        param +=f" @strItemID='{input.strItem}',"
     if(input.strItemGroup!=''):
-        param +=f" @strItemGroup='{input.strItemGroup}',"
+        param +=f" @strItemGroupID='{input.strItemGroup}',"
     if(input.strItemSubitem!=''):
-        param +=f" @strItemSubitem='{input.strItemSubitem}',"
+        param +=f" @strItemSubitemID='{input.strItemSubitem}',"
     if(input.strMetalType!=''):
         param +=f" @strMetalType='{input.strMetalType}',"
     if(input.strModeofSale!=''):
@@ -131,15 +131,15 @@ def CommonParam(input:CardandChartInput):
     if(input.strPurchaseParty!=''):
         param +=f" @strPurchaseParty='{input.strPurchaseParty}',"
     if(input.strProduct!=''):
-        param +=f" @strProduct='{input.strProduct}',"
+        param +=f" @strProductID='{input.strProduct}',"
     if(input.strSaleman!=''):
-        param +=f" @strSaleman='{input.strSaleman}',"
+        param +=f" @strSalemanID='{input.strSaleman}',"
     if(input.strSaleAging!=''):
         param +=f" @strSaleAging='{input.strSaleAging}',"
     if(input.strSalesParty!=''):
         param +=f" @strSalesParty='{input.strSalesParty}',"        
     if(input.strState!=''):
-        param +=f" @strState='{input.strState}',"
+        param +=f" @strStateID='{input.strState}',"
     else:
         param = param[:len(param)-1]
     
