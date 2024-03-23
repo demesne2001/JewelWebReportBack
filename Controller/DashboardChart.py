@@ -86,7 +86,7 @@ def GetSalesmanWise(input:CardandChartInput):
 
 @Chart.post('/GetCommanChart')
 def GetCommanChart(input:CardandChartInput):
-    return DashboardChartService.GetSalesmanWise(input)
+    return DashboardChartService.GetCommanChart(input)
 
 
 
