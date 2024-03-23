@@ -26,4 +26,5 @@ class CardandChartInput(BaseModel):
     PageNo:int
     PageSize:int
     Search:str
+    Grouping:str
    

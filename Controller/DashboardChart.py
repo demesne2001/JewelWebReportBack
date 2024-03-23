@@ -84,6 +84,10 @@ def GetTeamAndModeOFSalesWise(input:CardandChartInput):
 def GetSalesmanWise(input:CardandChartInput):
     return DashboardChartService.GetSalesmanWise(input)
 
+@Chart.post('/GetCommanChart')
+def GetCommanChart(input:CardandChartInput):
+    return DashboardChartService.GetSalesmanWise(input)
+
 
 
 
