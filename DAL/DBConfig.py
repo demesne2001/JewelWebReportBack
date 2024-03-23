@@ -13,6 +13,7 @@ print(server)
 version='18'
 # WRconnection = (
 #     f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
+
 WRconnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
 class Connection(Enum):
     LiveConnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
