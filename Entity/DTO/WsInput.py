@@ -7,7 +7,6 @@ class CardandChartInput(BaseModel):
     strBranch:str
     strState:str
     strCity:str
-    strCity:str
     strItem:str
     strSubItem:str
     strItemGroup:str
