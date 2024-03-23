@@ -234,7 +234,7 @@ def GetCommanChart(input:CardandChartInput):
         param=DBConfig.CommonParam(input)
         if(len(param)>0):
             param+=f",@Grouping='{input.Grouping}'"
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","")
+        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)
