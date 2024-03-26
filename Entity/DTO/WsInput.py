@@ -4,27 +4,27 @@ from pydantic import BaseModel,Field
     
 
 class CardandChartInput(BaseModel):
-    strBranch:str
-    strState:str
-    strCity:str
-    strItem:str
-    strSubItem:str
-    strItemGroup:str
-    strItemSubitem:str
-    strPurchaseParty:str
-    strSalesParty:str
-    strSaleman:str
-    strProduct:str
-    strDesignCatalogue:str
-    strSaleAging:str
-    strModeofSale:str
-    strTeamModeofSale:str
-    FromDate:str
-    ToDate:str
-    strMetalType:str
-    strDayBook:str
-    PageNo:int
-    PageSize:int
-    Search:str
-    Grouping:str
+    strBranch:str | None= Field(default="")
+    strState:str| None= Field(default="")
+    strCity:str| None= Field(default="")
+    strItem:str| None= Field(default="")
+    strSubItem:str| None= Field(default="")
+    strItemGroup:str| None= Field(default="")
+    strItemSubitem:str| None= Field(default="")
+    strPurchaseParty:str| None= Field(default="")
+    strSalesParty:str| None= Field(default="")
+    strSaleman:str| None= Field(default="")
+    strProduct:str| None= Field(default="")
+    strDesignCatalogue:str| None= Field(default="")
+    strSaleAging:str| None= Field(default="")
+    strModeofSale:str| None= Field(default="")
+    strTeamModeofSale:str| None= Field(default="")
+    FromDate:str| None= Field(default="")
+    ToDate:str| None= Field(default="")
+    strMetalType:str| None= Field(default="")
+    strDayBook:str| None= Field(default="")
+    PageNo:int| None= Field(default=1)
+    PageSize:int| None= Field(default=10)
+    Search:str| None= Field(default="")
+    Grouping:str| None= Field(default="")
    
