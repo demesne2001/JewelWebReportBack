@@ -61,5 +61,17 @@ def GetStockAnalysisCard(input:CardandChartInput):
         result.Message.append(E)
     return result
 
+def GetCardValue(input:CardandChartInput):
+    result=CommanChartFilterResult()
+    try:
+        param=""
+        param=DBConfig.CommonParam(input)
+        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_Dashboard_GetCard","GetCardValue")
+    except  Exception as E:
+        result.HasError=True
+        result.Message.append(E)
+    return result
+
+
 
 

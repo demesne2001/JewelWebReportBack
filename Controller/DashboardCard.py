@@ -22,4 +22,8 @@ def GetCollectionCard(input:CardandChartInput):
 @Card.post('/GetStockAnalysisCard')
 def GetStockAnalysisCard(input:CardandChartInput):
     return DashboardCardService.GetStockAnalysisCard(input)
+
+@Card.post('/GetCardValue')
+def GetCardValue(input:CardandChartInput):
+    return DashboardCardService.GetCardValue(input)
  
