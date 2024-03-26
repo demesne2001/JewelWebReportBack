@@ -66,6 +66,11 @@ def GetCardValue(input:CardandChartInput):
     try:
         param=""
         param=DBConfig.CommonParam(input)
+        if(len(param)>0):
+            param+=f",@Grouping='{input.Grouping}'"
+        else:
+            param+=f"@Grouping='{input.Grouping}'"
+        print('param',param)
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_Dashboard_GetCard","GetCardValue")
     except  Exception as E:
         result.HasError=True
