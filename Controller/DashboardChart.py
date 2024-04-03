@@ -88,6 +88,9 @@ def GetSalesmanWise(input:CardandChartInput):
 def GetCommanChart(input:CardandChartInput):
     return DashboardChartService.GetCommanChart(input)
 
+@Chart.post('/GetDetailCommanChart')
+def GetDetailCommanChart(input:CardandChartInput):
+    return DashboardChartService.GetDetailCommanChart(input)
 
 
 
