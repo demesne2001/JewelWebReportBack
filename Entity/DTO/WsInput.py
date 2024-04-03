@@ -5,6 +5,7 @@ from pydantic import BaseModel,Field
 
 class CardandChartInput(BaseModel):
     strBranch:str | None= Field(default="")
+    strCompanyID:str | None= Field(default="")
     strState:str| None= Field(default="")
     strCity:str| None= Field(default="")
     strItem:str| None= Field(default="")

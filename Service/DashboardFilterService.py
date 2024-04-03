@@ -9,7 +9,9 @@ def GetBranch(input:CardandChartInput):
         if(input.PageNo>0):
             param +=f" @PageNo={input.PageNo},"
         if(input.PageSize>0):
-            param +=f" @PageSize={input.PageSize},"    
+            param +=f" @PageSize={input.PageSize},"
+        if(input.strCompanyID!=''):
+            param +=f" @strCompanyID='{input.strCompanyID}',"     
         param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_MstBranch_GetForHelp","")
     except  Exception as E:
@@ -42,7 +44,11 @@ def GetCity(input:CardandChartInput):
         if(input.PageNo>0):
             param +=f" @PageNo={input.PageNo},"
         if(input.PageSize>0):
-            param +=f" @PageSize={input.PageSize},"    
+            param +=f" @PageSize={input.PageSize},"
+        if(input.strState!=''):
+            param +=f" @StrStateID='{input.StrStateID}',"     
+        if(input.strRegionID!=''):
+            param +=f" @strRegionID='{input.strRegionID}',"                     
         param +=f" @Search='{input.Search}'"    
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstCity_GetForHelp","")
     except  Exception as E:
@@ -151,6 +157,8 @@ def GetPurchaseParty(input:CardandChartInput):
             param +=f" @PageNo={input.PageNo},"
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"
+        if(input.strCompanyID!=''):
+            param +=f" @strCompanyID='{input.strCompanyID}',"     
         param +=f" @Search='{input.Search}'"
                 
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstDesignCatalog_GetForHelp","")
@@ -169,6 +177,8 @@ def GetSalesParty(input:CardandChartInput):
             param +=f" @PageNo={input.PageNo},"
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"
+        if(input.strRegionID!=''):
+            param +=f" @strRegionID='{input.strRegionID}',"     
         param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_SalesParty_GetForHelp","")
     except  Exception as E:
