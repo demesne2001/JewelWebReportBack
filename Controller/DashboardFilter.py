@@ -77,3 +77,6 @@ def GetDayBook(input:CardandChartInput):
 def GetMetalType(input:CardandChartInput):
     return DashboardFilterService.GetMetalType(input)
 
+@Filter.post('/GetSalesAging')
+def GetSalesAging(input:CardandChartInput):
+    return DashboardFilterService.GetSalesAging(input)

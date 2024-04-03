@@ -10,6 +10,7 @@ class CardandChartInput(BaseModel):
     strItem:str| None= Field(default="")
     strSubItem:str| None= Field(default="")
     strItemGroup:str| None= Field(default="")
+    strRegionID:str| None= Field(default="")
     strItemSubitem:str| None= Field(default="")
     strPurchaseParty:str| None= Field(default="")
     strSalesParty:str| None= Field(default="")

@@ -137,7 +137,9 @@ def CommonParam(input:CardandChartInput):
     if(input.strSaleAging!=''):
         param +=f" @strSaleAging='{input.strSaleAging}',"
     if(input.strSalesParty!=''):
-        param +=f" @strSalesParty='{input.strSalesParty}',"        
+        param +=f" @strSalesParty='{input.strSalesParty}'," 
+    if(input.strRegionID!=''):
+        param +=f" @strRegionID='{input.strRegionID}',"           
     if(input.strState!=''):
         param +=f" @strStateID='{input.strState}',"
     else:

@@ -6,7 +6,11 @@ def GetBranch(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
-        
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_MstBranch_GetForHelp","")
     except  Exception as E:
         print(E)
@@ -19,6 +23,11 @@ def GetState(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstState_GetForHelp","")
     except  Exception as E:
         result.HasError=True
@@ -29,7 +38,12 @@ def GetState(input:CardandChartInput):
 def GetCity(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
-        param=""        
+        param=""    
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"    
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstCity_GetForHelp","")
     except  Exception as E:
         result.HasError=True
@@ -42,6 +56,11 @@ def GetRegion(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"
         # param=DBConfig.CommonParam(input)
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_RegionName_GetForHelp","")
     except  Exception as E:
@@ -55,6 +74,11 @@ def GetItem(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}',"
         
         param +=f" @strItemGroupID='{input.strItemGroup}',"      
         param +=f" @strProductID='{input.strProduct}'"
@@ -69,7 +93,12 @@ def GetItem(input:CardandChartInput):
 def GetSubItem(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
-        param=""        
+        param=""    
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"    
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstSubItem_GetForHelp","")
     except  Exception as E:
         result.HasError=True
@@ -81,6 +110,11 @@ def GetItemGroup(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstItemGroup_GetForHelp","")
     except  Exception as E:
         result.HasError=True
@@ -147,7 +181,12 @@ def GetSalesParty(input:CardandChartInput):
 def GetSaleman(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
-        param=""      
+        param=""   
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"   
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstSalesman_GetForHelp","")
     except  Exception as E:
         result.HasError=True
@@ -159,6 +198,11 @@ def GetProduct(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_MstProduct_GetForHelp","")
     except  Exception as E:
         result.HasError=True
@@ -191,6 +235,11 @@ def GetModeSale(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
+        if(input.PageNo>0):
+            param +=f" @PageNo={input.PageNo},"
+        if(input.PageSize>0):
+            param +=f" @PageSize={input.PageSize},"    
+        param +=f" @Search='{input.Search}'"
         # param=DBConfig.CommonParam(input)
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstChallanGenerateType_GetForHelp","")
     except  Exception as E:
@@ -240,7 +289,7 @@ def GetSalesAging(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""        
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_SalesSalesAging_GetForHelp","")
+        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_SalesAging_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)
