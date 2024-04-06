@@ -11,36 +11,41 @@ password=config("DBPass")
 
 print(server)
 version='18'
-# WRconnection = (
-#     f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
+WRconnection = (
+    f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
 
-WRconnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
+# WRconnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
 class Connection(Enum):
-    LiveConnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
-    Connection=(f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
+    LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
+    Connection=f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};'
     
 # WRconnection = (
 #     f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
 
 
-def Commandparam(input):
-    # key=input.keys()
+def Commandparam(input):   
+    key=list[input]
+    print('keys')
+    print(input)
+     # key=input.keys()
     # print(key)
     # for item in input:
     #     print('Keys',item.keys())
     # for i in input.kyes():
     #     print(i)
-    key=list[input]
-    print('keys')
-    print(input)
     
 
 def ExecuteDataReader(param,spname,MethodNname):    
     key_value_pairs=[]
-    drivers = [item for item in pyodbc.drivers()]    
-    connection=pyodbc.connect(DBConfig.WRconnection)
+    
+    drivers = [item for item in pyodbc.drivers()]  
+   
+    connection=pyodbc.connect(Connection.LiveConnection.value)
+    # connection=pyodbc.connect(Connection.Connection.value)
+    print(drivers)
     try:
-        cursor=connection.cursor()        
+        cursor=connection.cursor()   
+        print(f"EXEC {spname} {param}")            
         cursor.execute(f"EXEC {spname} {param}")
         columns = [column[0] for column in cursor.description]
         rows = cursor.fetchall()    

@@ -249,10 +249,10 @@ def GetDetailCommanChart(input:CardandChartInput):
     try:
         param=""       
         
-        param+=f",@Grouping='{input.Grouping}'"
+        param+=f"@Grouping='{input.Grouping}'"
         
         # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
-        result.lstResult=DBConfig.ExecuteDataReader(param,"[WR_DetailWise_Chart","GetDetailCommanChart")
+        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_DetailWise_Chart","GetDetailCommanChart")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)

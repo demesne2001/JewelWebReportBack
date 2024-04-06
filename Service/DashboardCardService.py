@@ -62,9 +62,11 @@ def GetStockAnalysisCard(input:CardandChartInput):
     return result
 
 def GetCardValue(input:CardandChartInput):
+    print('Service')
     result=CommanChartFilterResult()
     try:
         param=""
+        print('input',input)
         param=DBConfig.CommonParam(input)
         if(len(param)>0):
             param+=f",@Grouping='{input.Grouping}'"
@@ -73,6 +75,7 @@ def GetCardValue(input:CardandChartInput):
         print('param',param)
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_Dashboard_GetCard","GetCardValue")
     except  Exception as E:
+        # print(E)
         result.HasError=True
         result.Message.append(E)
     return result

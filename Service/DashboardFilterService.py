@@ -138,8 +138,12 @@ def GetItemWithSubitem(input:CardandChartInput):
             param +=f" @PageSize={input.PageSize},"            
         if(input.strItem!=''):
             param +=f" @strItemID='{input.strItem}',"
-        if(input.strItemSubitem!=''):
-            param +=f" @strItemSubitemID='{input.strItemSubitem}',"            
+        if(input.strSubItem!=''):
+            param +=f" @strSubItemID='{input.strSubItem}',"      
+        if(input.strItemGroup!=''):
+            param +=f" @strItemGroupID='{input.strItemGroup}'," 
+        if(input.strProduct!=''):
+            param +=f" @strProductID='{input.strProduct}',"       
         param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstItemSub_GetForHelp","")
     except  Exception as E:
