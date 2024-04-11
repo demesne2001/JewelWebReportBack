@@ -1,4 +1,4 @@
-from Entity.DTO.WsInput import CardandChartInput
+from Entity.DTO.WsInput import CardandChartInput,GetByID,AddEditChartOption
 from DAL import DBConfig
 from Entity.DTO.WsResponse import CommanChartFilterResult
 
@@ -257,3 +257,39 @@ def GetDetailCommanChart(input:CardandChartInput):
         result.HasError=True
         result.Message.append(E)
     return result 
+
+def GetChartOptionByID(input:GetByID):
+    result=CommanChartFilterResult()
+    try:
+        print(input.ID)
+        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetFilterGridByID")
+    except  Exception as E:
+        result.HasError=True
+        result.Message.append(E)
+    return result
+
+def ChartOptionAddEdit(input:AddEditChartOption):
+    result=CommanChartFilterResult()
+    if(input.ChartOption==''):
+        result.Message.append("ChartOption Required")
+    elif(input.ChartID<=0):
+        result.Message.append("ChartID Required")
+    if(len(result.Message)==0):
+        try:
+            ID=0
+            print('serviec')
+            ID=DBConfig.ExecuteNonQuery(input,"WR_mstChartOption_AddEdit","FilterGridAddEdit")
+            if(ID>0):
+                result.Message.append("Chart Option Updated Sucessfully")
+            elif(ID == -1):
+                result.Message.append("Already Have it...!")
+            elif(ID ==-5):
+                result.Message.append("Contact To Backend Developer")
+                result.HasError=True
+            
+        except  Exception as E:
+            result.HasError=True
+            result.Message.append(E)
+    else:
+        result.HasError=True
+    return result

@@ -34,8 +34,19 @@ class CardandChartInput(BaseModel):
    
 class GetByID(BaseModel):
     ID:int
+    vendorID:int | None= Field(default=1)
+    UserID:int| None= Field(default=1)
 
 class AddEditFilterGrid(BaseModel):
     FilterGridID:int
     FilterGrid:str
     FilterID:int
+    vendorID:int | None= Field(default=1)
+    UserID:int| None= Field(default=1)
+    
+class AddEditChartOption(BaseModel):
+    ChartOptionID:int
+    ChartOption:str
+    ChartID:int
+    vendorID:int | None= Field(default=1)
+    UserID:int| None= Field(default=1)
