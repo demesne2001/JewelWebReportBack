@@ -50,3 +50,11 @@ class AddEditChartOption(BaseModel):
     ChartID:int
     vendorID:int | None= Field(default=1)
     UserID:int| None= Field(default=1)
+    
+    
+class AddEditChartGroup(BaseModel):
+    ChartGroupID:int
+    ChartGroup:str
+    ChartID:int
+    vendorID:int | None= Field(default=1)
+    UserID:int| None= Field(default=1)

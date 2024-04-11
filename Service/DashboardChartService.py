@@ -1,5 +1,6 @@
 from Entity.DTO.WsInput import CardandChartInput,GetByID,AddEditChartOption
 from DAL import DBConfig
+from Entity.DTO import WsInput
 from Entity.DTO.WsResponse import CommanChartFilterResult
 
 def GetBranchWise(input:CardandChartInput):
@@ -262,7 +263,7 @@ def GetChartOptionByID(input:GetByID):
     result=CommanChartFilterResult()
     try:
         print(input.ID)
-        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetFilterGridByID")
+        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetChartOptionByID")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)
@@ -278,9 +279,45 @@ def ChartOptionAddEdit(input:AddEditChartOption):
         try:
             ID=0
             print('serviec')
-            ID=DBConfig.ExecuteNonQuery(input,"WR_mstChartOption_AddEdit","FilterGridAddEdit")
+            ID=DBConfig.ExecuteNonQuery(input,"WR_mstChartOption_AddEdit","ChartOptionAddEdit")
             if(ID>0):
                 result.Message.append("Chart Option Updated Sucessfully")
+            elif(ID == -1):
+                result.Message.append("Already Have it...!")
+            elif(ID ==-5):
+                result.Message.append("Contact To Backend Developer")
+                result.HasError=True
+            
+        except  Exception as E:
+            result.HasError=True
+            result.Message.append(E)
+    else:
+        result.HasError=True
+    return result
+
+def GetChartGroupByID(input:GetByID):
+    result=CommanChartFilterResult()
+    try:
+        print(input.ID)
+        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstChartGroup_GetByID","GetChartGroupByID")
+    except  Exception as E:
+        result.HasError=True
+        result.Message.append(E)
+    return result
+
+def ChartGroupAddEdit(input:WsInput.AddEditChartGroup):
+    result=CommanChartFilterResult()
+    if(input.ChartGroup==''):
+        result.Message.append("ChartGroup Required")
+    elif(input.ChartID<=0):
+        result.Message.append("ChartID Required")
+    if(len(result.Message)==0):
+        try:
+            ID=0
+            print('serviec')
+            ID=DBConfig.ExecuteNonQuery(input,"WR_mstChartGroup_AddEdit","ChartGroupAddEdit")
+            if(ID>0):
+                result.Message.append("Chart Group Updated Sucessfully")
             elif(ID == -1):
                 result.Message.append("Already Have it...!")
             elif(ID ==-5):
