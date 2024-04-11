@@ -30,3 +30,12 @@ class CardandChartInput(BaseModel):
     Search:str| None= Field(default="")
     Grouping:str| None= Field(default="")
    
+   
+   
+class GetByID(BaseModel):
+    ID:int
+
+class AddEditFilterGrid(BaseModel):
+    FilterGridID:int
+    FilterGrid:str
+    FilterID:int

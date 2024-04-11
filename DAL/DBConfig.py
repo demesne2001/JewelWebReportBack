@@ -33,7 +33,42 @@ def Commandparam(input):
     #     print('Keys',item.keys())
     # for i in input.kyes():
     #     print(i)
-    
+def spParam(input):
+    for i in input:
+        if(type(i[1]) is int):
+            if(i[1] > 0):              
+                newParam+=f"@{i[0]}={i[1]},"
+        elif(type(i[1]) is str):
+            if(i[1]!=""):
+                newParam+=f"@{i[0]}='{i[1]}',"
+        if(type(i[1]) is bool):
+            if(i[1]==False or i[1]==True):
+                newParam+=f"@{i[0]}={i[1]},"
+    result=','.join([s for s in newParam.split(',') if s])
+    return result
+
+def ExecuteNonQuery(input,spname,MethodNname):    
+    param=""
+    param=spParam(input)    
+    ID=0
+    drivers = [item for item in pyodbc.drivers()]    
+    wconnection=pyodbc.connect(Connection.LiveConnection.value)
+    try:
+        cursor=wconnection.cursor()             
+        cursor.execute(f"EXEC {spname} {param}")        
+        rows = cursor.fetchone() 
+        print(rows)
+        ID=rows[0]        
+        cursor.commit()
+    except Exception as e:
+        print(MethodNname + 'Error :- ',e)
+        print('SQL Query',f"EXEC {spname} {param}")
+        print('driver',drivers)
+        cursor.rollback()   
+    finally:
+        cursor.close()
+        wconnection.close()
+    return ID
 
 def ExecuteDataReader(param,spname,MethodNname):    
     key_value_pairs=[]
@@ -107,7 +142,7 @@ def ExecuteDataReader(param,spname,MethodNname):
         connection.close()
     return key_value_pairs
 
-def CommonParam(input:CardandChartInput):
+def  CommonParam(input:CardandChartInput):
     param=""
     if(input.strBranch!=''):
         param +=f" @strBranchID='{input.strBranch}',"
