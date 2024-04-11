@@ -34,24 +34,31 @@ def Commandparam(input):
     # for i in input.kyes():
     #     print(i)
 def spParam(input):
-    for i in input:
-        if(type(i[1]) is int):
-            if(i[1] > 0):              
-                newParam+=f"@{i[0]}={i[1]},"
-        elif(type(i[1]) is str):
-            if(i[1]!=""):
-                newParam+=f"@{i[0]}='{i[1]}',"
-        if(type(i[1]) is bool):
-            if(i[1]==False or i[1]==True):
-                newParam+=f"@{i[0]}={i[1]},"
-    result=','.join([s for s in newParam.split(',') if s])
+    newParam=""    
+    try:
+        for i in input:
+            print(i)
+            if(type(i[1]) is int):
+                if(i[1] > 0):              
+                    newParam+=f"@{i[0]}={i[1]},"                    
+            elif(type(i[1]) is str):
+                if(i[1]!=""):
+                    newParam+=f"@{i[0]}='{i[1]}',"                    
+            elif(type(i[1]) is bool):
+                if(i[1]==False or i[1]==True):
+                    newParam+=f"@{i[0]}={i[1]},"                    
+        result=','.join([s for s in newParam.split(',') if s])
+    except Exception as e:
+        print(e)    
     return result
 
 def ExecuteNonQuery(input,spname,MethodNname):    
     param=""
-    param=spParam(input)    
+    param=spParam(input)  
+    print(param)  
     ID=0
-    drivers = [item for item in pyodbc.drivers()]    
+    drivers = [item for item in pyodbc.drivers()]
+    print(drivers)    
     wconnection=pyodbc.connect(Connection.LiveConnection.value)
     try:
         cursor=wconnection.cursor()             

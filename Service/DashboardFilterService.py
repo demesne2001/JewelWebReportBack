@@ -314,7 +314,7 @@ def GetFilterGridByID(input:GetByID):
     result=CommanChartFilterResult()
     try:
         print(input.ID)
-        result.lstResult=DBConfig.ExecuteDataReader(input,"WR_mstFilterGrid_GetBYID","GetFilterGridByID")
+        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetFilterGridByID")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)
@@ -329,7 +329,8 @@ def FilterGridAddEdit(input:AddEditFilterGrid):
     if(len(result.Message)==0):
         try:
             ID=0
-            ID=DBConfig.ExecuteNonQuery(input,"WR_mstFilterGrid_AddEdit","GetFilterGridByID")
+            print('serviec')
+            ID=DBConfig.ExecuteNonQuery(input,"WR_mstFilterGrid_AddEdit","FilterGridAddEdit")
             if(ID>0):
                 result.Message.append("FilterGrid Updated Sucessfully")
             elif(ID == -1):
