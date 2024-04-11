@@ -263,7 +263,7 @@ def GetChartOptionByID(input:GetByID):
     result=CommanChartFilterResult()
     try:
         print(input.ID)
-        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetChartOptionByID")
+        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstChartOption_GetByID","GetChartOptionByID")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)
