@@ -20,7 +20,7 @@ WRconnection = (
 
 # WRconnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
 class Connection(Enum):
-    LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
+    LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
     Connection=f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
     
 # WRconnection = (
@@ -64,6 +64,7 @@ def ExecuteNonQuery(input,spname,MethodNname):
     drivers = [item for item in pyodbc.drivers()]
     print(drivers)    
     wconnection=pyodbc.connect(Connection.LiveConnection.value)
+    # wconnection=pyodbc.connect(Connection.Connection.value)
     try:
         cursor=wconnection.cursor()             
         cursor.execute(f"EXEC {spname} {param}")        
