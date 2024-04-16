@@ -2,7 +2,8 @@ import os
 import base64
 import cv2 
 from fastapi import APIRouter,Body,Depends
-
+from Entity.DTO.WsInput import UploadFile,DeleteFile,GetPDfUsingImageInput
+from Service import CommanService
 Common=APIRouter()
 
 BaseDirectory="Utility/Image/"

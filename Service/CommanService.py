@@ -4,10 +4,13 @@ from fpdf import FPDF
 import numpy as np
 from PIL import Image
 import img2pdf
-
+from Entity.DTO.WsInput import UploadFile,DeleteFile,GetPDfUsingImageInput
+from Entity.DTO.WsResponse import CommanChartFilterResult
+BaseDirectory="Utility/Image/"
+PDFBaseDirectory="Utility/PDF/"
 
 def ImageToDirectPDf(input:GetPDfUsingImageInput):
-    result=FilterResult()
+    result=CommanChartFilterResult()
     
     if(len(input.ImageLst)<=0):
         result.Message.append("Image is Required")

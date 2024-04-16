@@ -1,8 +1,17 @@
 from pydantic import BaseModel,Field
 
 
+class UploadFile(BaseModel):
+    Base64:str
+    Extension:str
+    LoginID:str    
+class DeleteFile(BaseModel):
+    FileName:str
     
-
+class GetPDfUsingImageInput(BaseModel):
+    ImageLst:list
+    FileName:str
+    
 class CardandChartInput(BaseModel):
     strBranch:str | None= Field(default="")
     strCompanyID:str | None= Field(default="")
