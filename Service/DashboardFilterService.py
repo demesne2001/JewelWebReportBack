@@ -276,6 +276,15 @@ def GetTeamModeofSale(input:CardandChartInput):
         result.Message.append(E)
     return result 
 
+def GetMonth(input:CardandChartInput):
+    result=CommanChartFilterResult()
+    try:
+        param=""        
+        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_Month_GetForHelp","GetMonth")
+    except  Exception as E:
+        result.HasError=True
+        result.Message.append(E)
+    return result 
 
 
 def GetDayBook(input:CardandChartInput):

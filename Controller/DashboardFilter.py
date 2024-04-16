@@ -88,3 +88,7 @@ def GetFilterGridByID(input:GetByID):
 @Filter.post('/FilterGridAddEdit')
 def FilterGridAddEdit(input:AddEditFilterGrid):
     return DashboardFilterService.FilterGridAddEdit(input)
+
+@Filter.post('/GetMonth')
+def GetMonth(input:AddEditFilterGrid):
+    return DashboardFilterService.GetMonth(input)
