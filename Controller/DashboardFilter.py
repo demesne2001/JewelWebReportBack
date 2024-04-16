@@ -90,7 +90,7 @@ def FilterGridAddEdit(input:AddEditFilterGrid):
     return DashboardFilterService.FilterGridAddEdit(input)
 
 @Filter.post('/GetMonth')
-def GetMonth(input:AddEditFilterGrid):
+def GetMonth(input:CardandChartInput):
     return DashboardFilterService.GetMonth(input)
 
 @Filter.post('/GetDefaultScreenData')
