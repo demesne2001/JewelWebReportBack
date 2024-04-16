@@ -9,6 +9,10 @@ ENV PYTHONUNBUFFERED 1
 RUN pip3 install fastapi uvicorn
 RUN pip3 install --upgrade pip  
 
+
+RUN apt-get update && apt-get install -y python3-opencv
+RUN pip install opencv-python
+
 COPY . /BackendJewelWebReport
 
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -

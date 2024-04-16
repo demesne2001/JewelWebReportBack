@@ -1,6 +1,7 @@
 from Entity.DTO.WsInput import CardandChartInput
 from Entity.DTO.WsResponse import CommanChartFilterResult
 from DAL import DBConfig
+from Service import CommanScript
 
 def GetSalesEfficiencyCard(input:CardandChartInput):
     result=CommanChartFilterResult()
@@ -76,6 +77,7 @@ def GetCardValue(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_Dashboard_GetCard","GetCardValue")
     except  Exception as E:
         # print(E)
+        CommanScript.ErrorLog("GetCardValue",DBConfig.spParam(input),"Wr_Dashboard_GetCard",E)
         result.HasError=True
         result.Message.append(str(E))
     return result

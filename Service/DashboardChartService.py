@@ -2,6 +2,7 @@ from Entity.DTO.WsInput import CardandChartInput,GetByID,AddEditChartOption
 from DAL import DBConfig
 from Entity.DTO import WsInput
 from Entity.DTO.WsResponse import CommanChartFilterResult
+from Service import CommanScript
 
 def GetBranchWise(input:CardandChartInput):
     result=CommanChartFilterResult()
@@ -241,6 +242,7 @@ def GetCommanChart(input:CardandChartInput):
         # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
     except  Exception as E:
+        CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
         result.HasError=True
         result.Message.append(str(E))
     return result 
@@ -255,6 +257,7 @@ def GetDetailCommanChart(input:CardandChartInput):
         # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
         result.lstResult=DBConfig.ExecuteDataReader(param,"WR_DetailWise_Chart","GetDetailCommanChart")
     except  Exception as E:
+        CommanScript.ErrorLog("GetDetailCommanChart",DBConfig.spParam(input),"WR_DetailWise_Chart",E)
         result.HasError=True
         result.Message.append(str(E))
     return result 
@@ -265,6 +268,7 @@ def GetChartOptionByID(input:GetByID):
         print(input.ID)
         result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstChartOption_GetByID","GetChartOptionByID")
     except  Exception as E:
+        CommanScript.ErrorLog("GetChartOptionByID",f"@ID={input.ID}","WR_mstChartOption_GetByID",E)
         result.HasError=True
         result.Message.append(str(E))
     return result
@@ -289,6 +293,7 @@ def ChartOptionAddEdit(input:AddEditChartOption):
                 result.HasError=True
             
         except  Exception as E:
+            CommanScript.ErrorLog("ChartOptionAddEdit",DBConfig.spParam(input),"WR_mstChartOption_AddEdit",E)
             result.HasError=True
             result.Message.append(str(E))
     else:
@@ -301,6 +306,7 @@ def GetChartGroupByID(input:GetByID):
         print(input.ID)
         result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstChartGroup_GetByID","GetChartGroupByID")
     except  Exception as E:
+        CommanScript.ErrorLog("GetChartGroupByID",f"@ID={input.ID}","WR_mstChartGroup_GetByID",E)
         result.HasError=True
         result.Message.append(E)
     return result
@@ -325,6 +331,7 @@ def ChartGroupAddEdit(input:WsInput.AddEditChartGroup):
                 result.HasError=True
             
         except  Exception as E:
+            CommanScript.ErrorLog("ChartGroupAddEdit",DBConfig.spParam(input),"WR_mstChartGroup_AddEdit",E)
             result.HasError=True
             result.Message.append(str(E))
     else:
