@@ -29,6 +29,8 @@ class CardandChartInput(BaseModel):
     PageSize:int| None= Field(default=10)
     Search:str| None= Field(default="")
     Grouping:str| None= Field(default="")
+    strMonth:str| None= Field(default="")
+    strFinYear:str| None= Field(default="")
    
    
    
