@@ -8,16 +8,20 @@ database=config("DBName")
 username=config("DBUser")
 password=config("DBPass")
 
+server2=config('dbconnection2')
+database2=config("DBName2")
+username2=config("DBUser2")
+password2=config("DBPass2")
 
 print(server)
 version='18'
 WRconnection = (
-    f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};')
+    f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};')
 
 # WRconnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
 class Connection(Enum):
     LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
-    Connection=f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};'
+    Connection=f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
     
 # WRconnection = (
 #     f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
@@ -130,24 +134,24 @@ def ExecuteDataReader(param,spname,MethodNname):
 #     return key_value_pairs
 
 # def ExecuteDataReader(param,spname,MethodNname,Connections):
-    key_value_pairs=[]
-    drivers = [item for item in pyodbc.drivers()]    
-    connection=pyodbc.connect(DBConfig.WRconnection)
-    try:
-        cursor=connection.cursor()        
-        cursor.execute(f"EXEC {spname} {param}")
-        columns = [column[0] for column in cursor.description]
-        rows = cursor.fetchall()        
-        for row in rows:
-            key_value_pairs.append(dict(zip(columns, row)))
-        cursor.close()
-        connection.close()
-    except Exception as e:
-        print(MethodNname + 'Error :- ',e)
-        print('SQL Query',f"EXEC {spname} {param}")
-        print('driver',drivers)
-        connection.close()
-    return key_value_pairs
+    # key_value_pairs=[]
+    # drivers = [item for item in pyodbc.drivers()]    
+    # connection=pyodbc.connect(DBConfig.WRconnection)
+    # try:
+    #     cursor=connection.cursor()        
+    #     cursor.execute(f"EXEC {spname} {param}")
+    #     columns = [column[0] for column in cursor.description]
+    #     rows = cursor.fetchall()        
+    #     for row in rows:
+    #         key_value_pairs.append(dict(zip(columns, row)))
+    #     cursor.close()
+    #     connection.close()
+    # except Exception as e:
+    #     print(MethodNname + 'Error :- ',e)
+    #     print('SQL Query',f"EXEC {spname} {param}")
+    #     print('driver',drivers)
+    #     connection.close()
+    # return key_value_pairs
 
 def  CommonParam(input:CardandChartInput):
     param=""
