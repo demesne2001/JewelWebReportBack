@@ -279,9 +279,8 @@ def GetTeamModeofSale(input:CardandChartInput):
 def GetDayBook(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
-        param=""
-        param=DBConfig.CommonParam(input)
-        result.lstResult=DBConfig.ExecuteDataReader(param,"","")
+        param=""        
+        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_Daybook_GetForHelp","GetDayBook")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)
