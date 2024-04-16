@@ -292,8 +292,9 @@ def GetMetalType(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
-        param=DBConfig.CommonParam(input)
-        result.lstResult=DBConfig.ExecuteDataReader(param,"","")
+        # param=DBConfig.CommonParam(input)
+      
+        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_mstMetalType_GetForHelp","GetMetalType")
     except  Exception as E:
         result.HasError=True
         result.Message.append(E)
