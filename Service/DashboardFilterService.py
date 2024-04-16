@@ -182,7 +182,9 @@ def GetSalesParty(input:CardandChartInput):
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"
         if(input.strRegionID!=''):
-            param +=f" @strRegionID='{input.strRegionID}',"     
+            param +=f" @strRegionID='{input.strRegionID}',"   
+        if(input.strDayBook!=''):
+            param +=f" @strDayBookID='{input.strDayBook}',"   
         param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_SalesParty_GetForHelp","")
     except  Exception as E:

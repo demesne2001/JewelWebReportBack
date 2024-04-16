@@ -164,7 +164,7 @@ def  CommonParam(input:CardandChartInput):
     if(input.strCity!=''):
         param +=f" @strCity='{input.strCity}',"
     if(input.strDayBook!=''):
-        param +=f" @strDayBook='{input.strDayBook}',"
+        param +=f" @strDayBookID='{input.strDayBook}',"
     if(input.strDesignCatalogue!=''):
         param +=f" @strDesignCatalogue='{input.strDesignCatalogue}',"
     if(input.FromDate!=''):
