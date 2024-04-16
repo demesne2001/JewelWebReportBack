@@ -13,14 +13,15 @@ database2=config("DBName2")
 username2=config("DBUser2")
 password2=config("DBPass2")
 
-print(server)
+print(server2)
 version='18'
 WRconnection = (
     f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};')
 
 # WRconnection=(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
 class Connection(Enum):
-    LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
+    # LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
+    LiveConnection=f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
     Connection=f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
     
 # WRconnection = (
