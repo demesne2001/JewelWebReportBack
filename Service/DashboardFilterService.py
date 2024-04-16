@@ -297,6 +297,16 @@ def GetDayBook(input:CardandChartInput):
         result.Message.append(E)
     return result 
 
+def GetDefaultScreenData():
+    result=CommanChartFilterResult()
+    try:
+        param=""        
+        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_DefaultScreen_GetData","GetDayBook")
+    except  Exception as E:
+        result.HasError=True
+        result.Message.append(E)
+    return result 
+
 
 def GetMetalType(input:CardandChartInput):
     result=CommanChartFilterResult()
