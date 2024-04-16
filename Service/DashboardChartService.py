@@ -242,7 +242,7 @@ def GetCommanChart(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 def GetDetailCommanChart(input:CardandChartInput):
@@ -256,7 +256,7 @@ def GetDetailCommanChart(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"WR_DetailWise_Chart","GetDetailCommanChart")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 def GetChartOptionByID(input:GetByID):
@@ -266,7 +266,7 @@ def GetChartOptionByID(input:GetByID):
         result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstChartOption_GetByID","GetChartOptionByID")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result
 
 def ChartOptionAddEdit(input:AddEditChartOption):
@@ -290,7 +290,7 @@ def ChartOptionAddEdit(input:AddEditChartOption):
             
         except  Exception as E:
             result.HasError=True
-            result.Message.append(E)
+            result.Message.append(str(E))
     else:
         result.HasError=True
     return result
@@ -326,7 +326,7 @@ def ChartGroupAddEdit(input:WsInput.AddEditChartGroup):
             
         except  Exception as E:
             result.HasError=True
-            result.Message.append(E)
+            result.Message.append(str(E))
     else:
         result.HasError=True
     return result

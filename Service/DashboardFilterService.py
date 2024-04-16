@@ -15,9 +15,9 @@ def GetBranch(input:CardandChartInput):
         param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_MstBranch_GetForHelp","")
     except  Exception as E:
-        print(E)
+        print(str(E))
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -33,7 +33,7 @@ def GetState(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstState_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -53,7 +53,7 @@ def GetCity(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstCity_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -71,7 +71,7 @@ def GetRegion(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_RegionName_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -92,7 +92,7 @@ def GetItem(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstitem_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -108,7 +108,7 @@ def GetSubItem(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstSubItem_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -124,7 +124,7 @@ def GetItemGroup(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstItemGroup_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -148,7 +148,7 @@ def GetItemWithSubitem(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstItemSub_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -168,7 +168,7 @@ def GetPurchaseParty(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstDesignCatalog_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -189,7 +189,7 @@ def GetSalesParty(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_SalesParty_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -206,7 +206,7 @@ def GetSaleman(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstSalesman_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -222,7 +222,7 @@ def GetProduct(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_MstProduct_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -243,7 +243,7 @@ def GetDesignCatalogue(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstDesignCatalog_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -260,7 +260,7 @@ def GetModeSale(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstChallanGenerateType_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -273,7 +273,7 @@ def GetTeamModeofSale(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 def GetMonth(input:CardandChartInput):
@@ -283,7 +283,7 @@ def GetMonth(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"WR_Month_GetForHelp","GetMonth")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -294,7 +294,7 @@ def GetDayBook(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"WR_Daybook_GetForHelp","GetDayBook")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 def GetDefaultScreenData():
@@ -304,7 +304,7 @@ def GetDefaultScreenData():
         result.lstResult=DBConfig.ExecuteDataReader(param,"WR_DefaultScreen_GetData","GetDayBook")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -317,7 +317,7 @@ def GetMetalType(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"WR_mstMetalType_GetForHelp","GetMetalType")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 def GetSalesAging(input:CardandChartInput):
@@ -327,7 +327,7 @@ def GetSalesAging(input:CardandChartInput):
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_SalesAging_GetForHelp","")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result 
 
 
@@ -338,7 +338,7 @@ def GetFilterGridByID(input:GetByID):
         result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetFilterGridByID")
     except  Exception as E:
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result
 
 def FilterGridAddEdit(input:AddEditFilterGrid):
@@ -362,7 +362,7 @@ def FilterGridAddEdit(input:AddEditFilterGrid):
             
         except  Exception as E:
             result.HasError=True
-            result.Message.append(E)
+            result.Message.append(str(E))
     else:
         result.HasError=True
     return result

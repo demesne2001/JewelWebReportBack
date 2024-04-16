@@ -77,7 +77,7 @@ def GetCardValue(input:CardandChartInput):
     except  Exception as E:
         # print(E)
         result.HasError=True
-        result.Message.append(E)
+        result.Message.append(str(E))
     return result
 
 
