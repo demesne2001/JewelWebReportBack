@@ -2,6 +2,7 @@ from decouple import config
 import pyodbc 
 from DAL import DBConfig
 from enum import Enum
+from Service import CommanScript
 from Entity.DTO.WsInput import CardandChartInput
 server=config('dbconnection')
 database=config("DBName")
@@ -54,6 +55,7 @@ def spParam(input):
                     newParam+=f"@{i[0]}={i[1]},"                    
         result=','.join([s for s in newParam.split(',') if s])
     except Exception as e:
+        CommanScript.ErrorLog("spParam",str(input),"spParam",e)
         print(e)    
     return result
 
@@ -74,6 +76,7 @@ def ExecuteNonQuery(input,spname,MethodNname):
         ID=rows[0]        
         cursor.commit()
     except Exception as e:
+        CommanScript.ErrorLog("ExecuteNonQuery",input,spname,e)
         print(MethodNname + 'Error :- ',e)
         print('SQL Query',f"EXEC {spname} {param}")
         print('driver',drivers)
@@ -104,6 +107,7 @@ def ExecuteDataReader(param,spname,MethodNname):
         cursor.close()
         connection.close()
     except Exception as e:
+        CommanScript.ErrorLog("ExecuteDataReader",param,spname,e)
         print(MethodNname + 'Error :- ',e)
         print('SQL Query',f"EXEC {spname} {param}")
         print('driver',drivers)
