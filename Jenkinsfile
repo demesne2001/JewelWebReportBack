@@ -31,7 +31,7 @@ pipeline {
         stage('Docker Run') {
             steps {
                 script{
-                    bat 'docker run -p 5000:5000 -it -v SharedImages:/BackendJewelWebReport/Utility/Image -v SharePDF:/BackendJewelWebReport/Utility/PDF -v ShareLogFile:/BackendJewelWebReport/Utility/Logfile -d --name  webjewelreportback  webjewelreportback'
+                    bat 'docker run -p 522002:522002 -it -v SharedImages:/BackendJewelWebReport/Utility/Image -v SharePDF:/BackendJewelWebReport/Utility/PDF -v ShareLogFile:/BackendJewelWebReport/Utility/Logfile -d --name  webjewelreportback  webjewelreportback'
                 }
                 echo 'Docker Running'
             }
