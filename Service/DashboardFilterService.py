@@ -1,6 +1,7 @@
 from Entity.DTO.WsInput import CardandChartInput,AddEditFilterGrid,GetByID
 from DAL import DBConfig
 from Entity.DTO.WsResponse import CommanChartFilterResult
+from Service import CommanScript
 
 def GetBranch(input:CardandChartInput):
     result=CommanChartFilterResult()
@@ -149,6 +150,7 @@ def GetItemWithSubitem(input:CardandChartInput):
         param +=f" @Search='{input.Search}'"
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstItemSub_GetForHelp","")
     except  Exception as E:
+        CommanScript.ErrorLog("GetItemWithSubitem",DBConfig.spParam(input),"Wr_mstItemSub_GetForHelp",E)
         result.HasError=True
         result.Message.append(str(E))
     return result 
