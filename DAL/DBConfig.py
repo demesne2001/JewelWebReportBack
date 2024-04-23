@@ -23,7 +23,7 @@ WRconnection = (
 class Connection(Enum):
     LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
     # LiveConnection=f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
-    Connection=f'DRIVER=SQL Server;SERVER={server};DATABASE={database};UID={username2};PWD={password};'
+    Connection=f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
     
 # WRconnection = (
 #     f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
@@ -202,7 +202,7 @@ def  CommonParam(input:CardandChartInput):
     if(input.strFinYear!=''):
         param +=f" @strFinYear='{input.strFinYear}',"  
     if(input.strState!=''):
-        param +=f" @strStateID='{input.strState}',"
+        param +=f" @strState='{input.strState}'"
     else:
         param = param[:len(param)-1]
     
