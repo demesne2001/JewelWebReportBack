@@ -66,8 +66,8 @@ def ExecuteNonQuery(input,spname,MethodNname):
     ID=0
     drivers = [item for item in pyodbc.drivers()]
     print(drivers)    
-    # wconnection=pyodbc.connect(Connection.LiveConnection.value)
-    wconnection=pyodbc.connect(Connection.Connection.value)
+    wconnection=pyodbc.connect(Connection.LiveConnection.value)
+    # wconnection=pyodbc.connect(Connection.Connection.value)
     try:
         cursor=wconnection.cursor()             
         cursor.execute(f"EXEC {spname} {param}")        
@@ -91,8 +91,8 @@ def ExecuteDataReader(param,spname,MethodNname):
     
     drivers = [item for item in pyodbc.drivers()]  
    
-    # connection=pyodbc.connect(Connection.LiveConnection.value)
-    connection=pyodbc.connect(Connection.Connection.value)
+    connection=pyodbc.connect(Connection.LiveConnection.value)
+    # connection=pyodbc.connect(Connection.Connection.value)
     print(drivers)
     try:
         cursor=connection.cursor()   
