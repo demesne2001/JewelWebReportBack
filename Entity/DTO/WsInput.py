@@ -36,6 +36,8 @@ class CardandChartInput(BaseModel):
     strDayBook:str| None= Field(default="")
     PageNo:int| None= Field(default=1)
     PageSize:int| None= Field(default=10)
+    SortBy:str|None= Field(default="")
+    SortByLabel:str|None= Field(default="")
     Search:str| None= Field(default="")
     Grouping:str| None= Field(default="")
     strMonth:str| None= Field(default="")

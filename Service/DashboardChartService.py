@@ -238,6 +238,9 @@ def GetCommanChart(input:CardandChartInput):
             param+=f",@Grouping='{input.Grouping}'"
         else:
             param+=f"@Grouping='{input.Grouping}'"
+        param+=f",@SortBy='{input.SortBy}'"
+        if(input.SortByLabel !=''):
+            param+=f",@SortByLabel='{input.SortByLabel}'"
         print('param',param)
         # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
         result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
