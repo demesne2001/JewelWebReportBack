@@ -231,23 +231,30 @@ def GetSalesmanWise(input:CardandChartInput):
 
 def GetCommanChart(input:CardandChartInput):
     result=CommanChartFilterResult()
-    try:
-        param=""
-        param=DBConfig.CommonParam(input)
-        if(len(param)>0):
-            param+=f",@Grouping='{input.Grouping}'"
-        else:
-            param+=f"@Grouping='{input.Grouping}'"
-        param+=f",@SortBy='{input.SortBy}'"
-        if(input.SortByLabel !=''):
-            param+=f",@SortByLabel='{input.SortByLabel}'"
-        print('param',param)
-        # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
-    except  Exception as E:
-        CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
+    if(input.Grouping==""):
+        result.Message.append("Required Grouping")
+    elif(input.SortBy==""):
+        result.Message.append("Required SortBy")
+    if(len(result.Message)==0):
+        try:
+            param=""
+            param=DBConfig.CommonParam(input)
+            if(len(param)>0):
+                param+=f",@Grouping='{input.Grouping}'"
+            else:
+                param+=f"@Grouping='{input.Grouping}'"
+            param+=f",@SortBy='{input.SortBy}'"
+            if(input.SortByLabel !=''):
+                param+=f",@SortByLabel='{input.SortByLabel}'"
+            print('param',param)
+            # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
+            result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
+        except  Exception as E:
+            CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
         result.HasError=True
-        result.Message.append(str(E))
     return result 
 
 def GetDetailCommanChart(input:CardandChartInput):
