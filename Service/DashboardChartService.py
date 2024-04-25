@@ -1,4 +1,4 @@
-from Entity.DTO.WsInput import CardandChartInput,GetByID,AddEditChartOption
+from Entity.DTO.WsInput import CardandChartInput,GetByID,AddEditChartOption,ChartWiseImageInput
 from DAL import DBConfig
 from Entity.DTO import WsInput
 from Entity.DTO.WsResponse import CommanChartFilterResult
@@ -272,6 +272,21 @@ def GetDetailCommanChart(input:CardandChartInput):
         result.Message.append(str(E))
     return result 
 
+def GetDetailChartImage(input:ChartWiseImageInput):
+    result=CommanChartFilterResult() 
+    if(len(result.Message)==0):
+        try:
+            param=""
+            param=DBConfig.spParam(input)
+            result.lstResult=DBConfig.ExecuteDataReader(param,"WR_GetBarcodeImage_GetByID","GetDetailChartImage")
+        except  Exception as E:
+            CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result     
+                
 def GetChartOptionByID(input:GetByID):
     result=CommanChartFilterResult()
     try:

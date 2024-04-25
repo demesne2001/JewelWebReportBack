@@ -1,6 +1,6 @@
 from fastapi import APIRouter,Body,Depends
 from Service import DashboardChartService
-from Entity.DTO.WsInput import CardandChartInput,GetByID,AddEditChartOption,AddEditChartGroup
+from Entity.DTO.WsInput import CardandChartInput,GetByID,AddEditChartOption,AddEditChartGroup,ChartWiseImageInput
 Chart=APIRouter()
 
 @Chart.post('/GetBranchWise')
@@ -91,6 +91,10 @@ def GetCommanChart(input:CardandChartInput):
 @Chart.post('/GetDetailCommanChart')
 def GetDetailCommanChart(input:CardandChartInput):
     return DashboardChartService.GetDetailCommanChart(input)
+
+@Chart.post('/GetDetailChartImage')
+def GetDetailChartImage(input:ChartWiseImageInput):
+    return DashboardChartService.GetDetailChartImage(input)
 
 @Chart.post('/GetChartOptionByID')
 def GetChartOptionByID(input:GetByID):

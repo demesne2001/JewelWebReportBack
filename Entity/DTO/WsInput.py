@@ -12,6 +12,26 @@ class GetPDfUsingImageInput(BaseModel):
     ImageLst:list
     FileName:str
     
+class ChartWiseImageInput(BaseModel):
+    StrBranchId :str | None= Field(default="")
+    strState :str | None= Field(default="")
+    strCity :str | None= Field(default="")
+    strRegionID :str | None= Field(default="")
+    strSubItemID :str | None= Field(default="")
+    strItemID :str | None= Field(default="")
+    strItemGroupID :str | None= Field(default="")
+    strItemSubitemID :str | None= Field(default="")
+    strDesignCodeID :str | None= Field(default="")
+    strSalesParty :str | None= Field(default="")
+    strSalemanID :str | None= Field(default="")
+    strProductID :str | None= Field(default="")
+    strDesignCatalogID :str | None= Field(default="")
+    strSaleAging :str | None= Field(default="")
+    strMonth :str | None= Field(default="")
+    strFinYear :str | None= Field(default="")
+    PageNo: int | None= Field(default=1)
+    PageSize: int | None= Field(default=20)
+    
 class CardandChartInput(BaseModel):
     strBranch:str | None= Field(default="")
     strCompanyID:str | None= Field(default="")
