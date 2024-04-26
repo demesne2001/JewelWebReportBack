@@ -62,6 +62,7 @@ class CardandChartInput(BaseModel):
     Grouping:str| None= Field(default="")
     strMonth:str| None= Field(default="")
     strFinYear:str| None= Field(default="")
+    Unity:str| None=Field(default="G")
    
    
    
