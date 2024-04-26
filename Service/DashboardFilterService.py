@@ -156,7 +156,7 @@ def GetItemWithSubitem(input:CardandChartInput):
     return result 
 
 
-def GetPurchaseParty(input:CardandChartInput):
+def Getdesigncode(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
@@ -164,12 +164,10 @@ def GetPurchaseParty(input:CardandChartInput):
         if(input.PageNo>0):
             param +=f" @PageNo={input.PageNo},"
         if(input.PageSize>0):
-            param +=f" @PageSize={input.PageSize},"
-        if(input.strCompanyID!=''):
-            param +=f" @strCompanyID='{input.strCompanyID}',"     
+            param +=f" @PageSize={input.PageSize},"          
         param +=f" @Search='{input.Search}'"
                 
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstDesignCatalog_GetForHelp","")
+        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_mstdesigncode_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
