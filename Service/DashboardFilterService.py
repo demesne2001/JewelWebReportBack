@@ -160,7 +160,7 @@ def Getdesigncode(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""
-        param=DBConfig.CommonParam(input)
+        
         if(input.PageNo>0):
             param +=f" @PageNo={input.PageNo},"
         if(input.PageSize>0):
