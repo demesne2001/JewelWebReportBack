@@ -230,11 +230,7 @@ def GetSalesmanWise(input:CardandChartInput):
     return result 
 
 def GetCommanChart(input:CardandChartInput):
-    result=CommanChartFilterResult()
-    if(input.Grouping==""):
-        result.Message.append("Required Grouping")
-    elif(input.SortBy==""):
-        result.Message.append("Required SortBy")
+    result=CommanChartFilterResult()   
     if(len(result.Message)==0):
         try:
             param=""
