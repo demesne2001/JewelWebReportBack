@@ -13,7 +13,7 @@ class GetPDfUsingImageInput(BaseModel):
     FileName:str
     
 class ChartWiseImageInput(BaseModel):
-    StrBranch :str | None= Field(default="")
+    strBranch :str | None= Field(default="")
     strState :str | None= Field(default="")
     strCity :str | None= Field(default="")
     strRegionID :str | None= Field(default="")
