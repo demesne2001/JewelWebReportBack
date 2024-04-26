@@ -46,6 +46,7 @@ class CardandChartInput(BaseModel):
     strSalesParty:str| None= Field(default="")
     strSaleman:str| None= Field(default="")
     strProduct:str| None= Field(default="")
+    strDesignCodeID:str| None= Field(default="")
     strDesignCatalogue:str| None= Field(default="")
     strSaleAging:str| None= Field(default="")
     strModeofSale:str| None= Field(default="")

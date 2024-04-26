@@ -39,8 +39,11 @@ def GetItemWithSubitem(input:CardandChartInput):
 
 @Filter.post('/GetPurchaseParty')
 def GetPurchaseParty(input:CardandChartInput):
-    return DashboardFilterService.GetPurchaseParty(input)
+    return DashboardFilterService.Getdesigncode(input)
 
+@Filter.post('/Getdesigncode')
+def Getdesigncode(input:CardandChartInput):
+    return DashboardFilterService.Getdesigncode(input)
 
 @Filter.post('/GetSalesParty')
 def GetSalesParty(input:CardandChartInput):
