@@ -93,3 +93,7 @@ class AddEditChartGroup(BaseModel):
     ChartID:int
     vendorID:int | None= Field(default=1)
     UserID:int| None= Field(default=1)
+    
+class Login(BaseModel):
+    LoginID:str
+    PassWord:str

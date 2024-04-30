@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from decouple import config
-from Controller import DashboardCard,DashboardChart,DashboardFilter,CommonController
+from Controller import DashboardCard,DashboardChart,DashboardFilter,CommonController,Login
 import os
 from fastapi.staticfiles import StaticFiles
 app=FastAPI()
@@ -12,6 +12,7 @@ app.include_router(DashboardFilter.Filter,prefix='/Filter')
 app.include_router(DashboardCard.Card,prefix='/Card')
 app.include_router(DashboardChart.Chart,prefix='/Chart')
 app.include_router(CommonController.Common,prefix='/Common')
+app.include_router(Login.LoginController,prefix='/Login')
 origins=['*']
 app.add_middleware(CORSMiddleware,allow_origins=origins,allow_credentials=True,allow_methods=['*'],allow_headers=['*'],)
 

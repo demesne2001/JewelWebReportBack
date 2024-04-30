@@ -23,3 +23,7 @@ class ImageRsult(CommonResult):
         super().__init__()
         self.ImageName:str
         
+class LoginResult(CommonResult):
+    def __init__(self):
+        super().__init__()
+        self.UserName:str
