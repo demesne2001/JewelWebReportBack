@@ -6,5 +6,5 @@ LoginController=APIRouter()
 
 @LoginController.post('/login')
 async def login(input:Login): 
-       result=AuthenticationService.LoginServi(input)
+       result=AuthenticationService.Authentication(input)
        return result

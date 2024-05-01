@@ -1,10 +1,11 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI,Depends
 from fastapi.middleware.cors import CORSMiddleware
 from decouple import config
 from Controller import DashboardCard,DashboardChart,DashboardFilter,CommonController,Login
 import os
 from fastapi.staticfiles import StaticFiles
+from Service.jwtBearer import jwtBearer
 app=FastAPI()
 
 
@@ -34,6 +35,8 @@ if(os.path.exists(PDFPath)):
     pass
 else:
     os.makedirs(PDFPath)
+
+
     
 app.mount("/image", StaticFiles(directory="Utility/Image"), name="image")
 app.mount("/PDF", StaticFiles(directory="Utility/PDF"), name="PDF")

@@ -2,6 +2,7 @@ from Entity.DTO.WsInput import CardandChartInput,AddEditFilterGrid,GetByID
 from DAL import DBConfig
 from Entity.DTO.WsResponse import CommanChartFilterResult
 from Service import CommanScript
+from Service import jwtBearer
 
 def GetBranch(input:CardandChartInput):
     result=CommanChartFilterResult()
@@ -13,8 +14,8 @@ def GetBranch(input:CardandChartInput):
             param +=f" @PageSize={input.PageSize},"
         if(input.strCompanyID!=''):
             param +=f" @strCompanyID='{input.strCompanyID}',"     
-        param +=f" @Search='{input.Search}'"
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_MstBranch_GetForHelp","")
+        param +=f" @Search='{input.Search}'"        
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_MstBranch_GetForHelp","")
     except  Exception as E:
         CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
         print(str(E))
@@ -32,7 +33,7 @@ def GetState(input:CardandChartInput):
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"    
         param +=f" @Search='{input.Search}'"
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstState_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstState_GetForHelp","")
     except  Exception as E:
         CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
         result.HasError=True
@@ -53,7 +54,7 @@ def GetCity(input:CardandChartInput):
         if(input.strRegionID!=''):
             param +=f" @strRegionID='{input.strRegionID}',"                     
         param +=f" @Search='{input.Search}'"    
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstCity_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstCity_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -71,7 +72,7 @@ def GetRegion(input:CardandChartInput):
             param +=f" @PageSize={input.PageSize},"    
         param +=f" @Search='{input.Search}'"
         # param=DBConfig.CommonParam(input)
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_RegionName_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_RegionName_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -92,7 +93,7 @@ def GetItem(input:CardandChartInput):
         param +=f" @strItemGroupID='{input.strItemGroup}',"      
         param +=f" @strProductID='{input.strProduct}'"
    
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstitem_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstitem_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -108,7 +109,7 @@ def GetSubItem(input:CardandChartInput):
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"    
         param +=f" @Search='{input.Search}'"    
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstSubItem_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstSubItem_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -124,7 +125,7 @@ def GetItemGroup(input:CardandChartInput):
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"    
         param +=f" @Search='{input.Search}'"
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstItemGroup_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstItemGroup_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -148,7 +149,7 @@ def GetItemWithSubitem(input:CardandChartInput):
         if(input.strProduct!=''):
             param +=f" @strProductID='{input.strProduct}',"       
         param +=f" @Search='{input.Search}'"
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstItemSub_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstItemSub_GetForHelp","")
     except  Exception as E:
         CommanScript.ErrorLog("GetItemWithSubitem",DBConfig.spParam(input),"Wr_mstItemSub_GetForHelp",E)
         result.HasError=True
@@ -167,7 +168,7 @@ def Getdesigncode(input:CardandChartInput):
             param +=f" @PageSize={input.PageSize},"          
         param +=f" @Search='{input.Search}'"
                 
-        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_mstdesigncode_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstdesigncode_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -188,7 +189,7 @@ def GetSalesParty(input:CardandChartInput):
         if(input.strDayBook!=''):
             param +=f" @strDayBookID='{input.strDayBook}',"   
         param +=f" @Search='{input.Search}'"
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_SalesParty_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_SalesParty_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -205,7 +206,7 @@ def GetSaleman(input:CardandChartInput):
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"    
         param +=f" @Search='{input.Search}'"   
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstSalesman_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstSalesman_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -221,7 +222,7 @@ def GetProduct(input:CardandChartInput):
         if(input.PageSize>0):
             param +=f" @PageSize={input.PageSize},"    
         param +=f" @Search='{input.Search}'"
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_MstProduct_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_MstProduct_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -242,7 +243,7 @@ def GetDesignCatalogue(input:CardandChartInput):
             param +=f" @strItemSubitemID='{input.strItemSubitem}',"            
         param +=f" @Search='{input.Search}'"
         
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstDesignCatalog_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstDesignCatalog_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -259,7 +260,7 @@ def GetModeSale(input:CardandChartInput):
             param +=f" @PageSize={input.PageSize},"    
         param +=f" @Search='{input.Search}'"
         # param=DBConfig.CommonParam(input)
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_mstChallanGenerateType_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_mstChallanGenerateType_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -272,7 +273,7 @@ def GetTeamModeofSale(input:CardandChartInput):
     try:
         param=""
         param=DBConfig.CommonParam(input)
-        result.lstResult=DBConfig.ExecuteDataReader(param,"","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -282,7 +283,7 @@ def GetMonth(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""        
-        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_Month_GetForHelp","GetMonth")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_Month_GetForHelp","GetMonth")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -293,7 +294,7 @@ def GetDayBook(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""        
-        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_Daybook_GetForHelp","GetDayBook")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_Daybook_GetForHelp","GetDayBook")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -303,7 +304,7 @@ def GetDefaultScreenData():
     result=CommanChartFilterResult()
     try:
         param=""        
-        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_DefaultScreen_GetData","GetDayBook")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_DefaultScreen_GetData","GetDayBook")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -316,7 +317,7 @@ def GetMetalType(input:CardandChartInput):
         param=""
         # param=DBConfig.CommonParam(input)
       
-        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_mstMetalType_GetForHelp","GetMetalType")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstMetalType_GetForHelp","GetMetalType")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -326,7 +327,7 @@ def GetSalesAging(input:CardandChartInput):
     result=CommanChartFilterResult()
     try:
         param=""        
-        result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_SalesAging_GetForHelp","")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_SalesAging_GetForHelp","")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))
@@ -337,7 +338,7 @@ def GetFilterGridByID(input:GetByID):
     result=CommanChartFilterResult()
     try:
         print(input.ID)
-        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetFilterGridByID")
+        result.lstResult=DBConfig.CDBExecuteDataReader(f"@ID={input.ID}","WR_mstFilterGrid_GetBYID","GetFilterGridByID")
     except  Exception as E:
         result.HasError=True
         result.Message.append(str(E))

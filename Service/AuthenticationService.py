@@ -1,63 +1,74 @@
 
-# from Crypto.Cipher import AES
+from Crypto.Cipher import AES
 from DAL import DBConfig
-
+from io import BytesIO
+import base64
+import time
+import jwt
 # import pprp.crypto
 from Entity.DTO.WsInput import Login
-from Entity.DTO.WsResponse import LoginResult 
-key="X#@q!p~!@#$%!^&}|()_-hb#"
-iv="!@#$IV7890123456"
-blocksize=24
-s="NAts58zed8FrDT6pU7Le8w=="
+from Entity.DTO.WsResponse import LoginResult,AuthenticationResult 
+from decouple import config
 
+JWT_KEY=config("secret")
+JWT_ALGO=config("algorithm")
+ENCRYPTION_ALGORITHM_NAME = 'Rijndael'
+ENCRYPTION_INIT_VECTOR = '!#@%IVAPO0SP&UHK'
+ENCRYPTION_KEY = 'T@#r$t~145S^$%^&*()_+'
+ENCRYPTION_KEY_BYTES = 16 
 
-# def rjindael_decrypt_gen_CBC(key, s, iv, block_size=pprp.config.DEFAULT_BLOCK_SIZE_B):
-#     r = pprp.crypto.rijndael(key, block_size=block_size) 
+def decrypt(value):
+    memory_stream_in = BytesIO()
+    memory_stream_out = BytesIO()
+    byte_buffer = bytearray(2048)
+    result = ''
+    try:
+        # Write base64 decoded value to input memory stream
+        memory_stream_in.write(base64.b64decode(value))
+        memory_stream_in.seek(0)
 
-#     i = 0
-#     for block in s:
+        # Create symmetric algorithm (AES) with IV and key
+        symmetric_algorithm = AES.new(
+            GetKey(ENCRYPTION_KEY),
+            AES.MODE_CBC,
+            ENCRYPTION_INIT_VECTOR.encode('utf-8')
+        )
 
-#         decrypted = r.decrypt(block)
-#         print(decrypted,"decrypted")
-#         decrypted = xor(decrypted, iv)  
-#         iv = block
+        # Create crypto stream
+        crypto_stream = AESStream(memory_stream_in, symmetric_algorithm)
 
-#         yield decrypted
-#         i += 1
+        # Read and decrypt data
+        while True:
+            value_length = crypto_stream.readinto(byte_buffer)
+            if value_length == 0:
+                break
+            memory_stream_out.write(byte_buffer[:value_length])
 
-# def xor(block, iv):
-#     resultList = [ (a ^ b) for (a,b) in zip(block, iv) ]
-#     return bytes(resultList)
+        # Convert decrypted data to string
+        result = memory_stream_out.getvalue().decode('utf-8').rstrip('\0')
+    except Exception as e:
+        raise e
+    finally:
+        memory_stream_in.close()
+        memory_stream_out.close()
+    print(result,'decrption')
+    return result.strip()
 
-# def decryption():
-#     blocksize = 16
-#     sg = pprp.data_source_gen(s, blocksize) 
-#     dg = rjindael_decrypt_gen_CBC(key, sg, iv, blocksize)
-#     decrypted = pprp.decrypt_sink(dg, blocksize)
-#     print("Decrypted data: " + str(decrypted))
+class AESStream:
+    def __init__(self, memory_stream, cipher):
+        self.memory_stream = memory_stream
+        self.cipher = cipher
 
+    def readinto(self, buffer):
+        chunk = self.memory_stream.read(len(buffer))
+        decrypted_chunk = self.cipher.decrypt(chunk)
+        buffer[:len(decrypted_chunk)] = decrypted_chunk
+        return len(decrypted_chunk)
 
+def GetKey(key):
+    result_key = key[:ENCRYPTION_KEY_BYTES] if len(key) >= ENCRYPTION_KEY_BYTES else key.ljust(ENCRYPTION_KEY_BYTES, '0')
+    return result_key.encode('utf-8')
 
-# Working Code
-# def fix_binary_data_length(binary_value):
-#   block_length = 16
-#   binary_value_length = len(binary_value)
-#   length_with_padding = (
-#     binary_value_length + (block_length - binary_value_length) % block_length
-#   )
-#   return binary_value.ljust(length_with_padding, b'0')
-
-# def encrypt(value: str):
-#   binary_iv = iv.encode('UTF-8')
-#   binary_key = key.encode('UTF-8')
-#   binary_value = value.encode('UTF-8')
-#   cipher = AES.new(binary_key, AES.MODE_CBC, binary_iv)
-#   pad="0"
-#   binary_value1=lambda s:s +(16-len(s)% 16)*pad  
-#   inary_value = fix_binary_data_length(binary_value)
-#   encrypted_value = cipher.encrypt(inary_value)
-#   print(encrypted_value)  
-#   return str(encrypted_value)
 
 def LoginServi(input:Login):
     result=LoginResult()
@@ -81,3 +92,45 @@ def LoginServi(input:Login):
         result.Message.append(str(E))
         result.HasError=True
     return result
+  
+def Authentication(input:Login):
+    result=AuthenticationResult()
+    if(input.LoginID == ""):
+      result.Message.append("Please enter LoginID")
+    elif(input.PassWord == ""):
+      result.Message.append("Enter Your Password")
+    if(len(result.Message)==0):
+        lstresult=[]
+        param=f"@LoginID='{input.LoginID}'"        
+        lstresult=DBConfig.ExecuteDataReader(param,"WR_mstuser_GetAuth","Authentication")       
+        if(len(lstresult)>0):
+          # for row in lstresult[0]:
+            obj=lstresult[0]
+            print('obj',lstresult[0]['Password'])
+            if(input.PassWord==decrypt(lstresult[0]['Password'])):                
+                result.Token=TokenGenrater(lstresult[0])
+                result.UserName=lstresult[0]['UserName']
+            else:
+              result.HasError=True
+              result.Message.append("Invalid Password....!")
+              
+        else:
+            result.HasError=True
+            result.Message.append("Invalid User....!")
+    else:
+        pass
+    return result
+  
+def TokenGenrater(input):
+      print(input,'Token Gen')
+      payload={
+        "UserID":input['UserID'],
+        "VendorID":input['VendorID'],
+        "ConnectionString":input['Connectionstring'],
+        "DbName":input['DbName'],
+        "expiry":time.time()+600000        
+      }
+      token=jwt.encode(payload,JWT_KEY,algorithm=JWT_ALGO)
+      return token
+    
+    

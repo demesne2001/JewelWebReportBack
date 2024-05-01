@@ -246,7 +246,7 @@ def GetCommanChart(input:CardandChartInput):
                 param+=f",@Unity='{input.Unity}'"
             print('param',param)
             # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
-            result.lstResult=DBConfig.ExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
         except  Exception as E:
             CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
             result.HasError=True
@@ -261,9 +261,12 @@ def GetDetailCommanChart(input:CardandChartInput):
         param=""       
         
         param+=f"@Grouping='{input.Grouping}'"
+        # param+=f",@SortBy='{input.SortBy}'"
+        # if(input.SortByLabel !=''):
+        #     param+=f",@SortByLabel='{input.SortByLabel}'"
         
         # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
-        result.lstResult=DBConfig.ExecuteDataReader(param,"WR_DetailWise_Chart","GetDetailCommanChart")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_DetailWise_Chart","GetDetailCommanChart")
     except  Exception as E:
         CommanScript.ErrorLog("GetDetailCommanChart",DBConfig.spParam(input),"WR_DetailWise_Chart",E)
         result.HasError=True
@@ -276,7 +279,7 @@ def GetDetailChartImage(input:ChartWiseImageInput):
         try:
             param=""
             param=DBConfig.spParam(input)
-            result.lstResult=DBConfig.ExecuteDataReader(param,"WR_GetBarcodeImage_GetByID","GetDetailChartImage")
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_GetBarcodeImage_GetByID","GetDetailChartImage")
         except  Exception as E:
             CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
             result.HasError=True
@@ -289,7 +292,7 @@ def GetChartOptionByID(input:GetByID):
     result=CommanChartFilterResult()
     try:
         print(input.ID)
-        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstChartOption_GetByID","GetChartOptionByID")
+        result.lstResult=DBConfig.CDBExecuteDataReader(f"@ID={input.ID}","WR_mstChartOption_GetByID","GetChartOptionByID")
     except  Exception as E:
         CommanScript.ErrorLog("GetChartOptionByID",f"@ID={input.ID}","WR_mstChartOption_GetByID",E)
         result.HasError=True
@@ -306,7 +309,7 @@ def ChartOptionAddEdit(input:AddEditChartOption):
         try:
             ID=0
             print('serviec')
-            ID=DBConfig.ExecuteNonQuery(input,"WR_mstChartOption_AddEdit","ChartOptionAddEdit")
+            ID=DBConfig.CDBExecuteNonQuery(input,"WR_mstChartOption_AddEdit","ChartOptionAddEdit")
             if(ID>0):
                 result.Message.append("Chart Option Updated Sucessfully")
             elif(ID == -1):
@@ -327,7 +330,7 @@ def GetChartGroupByID(input:GetByID):
     result=CommanChartFilterResult()
     try:
         print(input.ID)
-        result.lstResult=DBConfig.ExecuteDataReader(f"@ID={input.ID}","WR_mstChartGroup_GetByID","GetChartGroupByID")
+        result.lstResult=DBConfig.CDBExecuteDataReader(f"@ID={input.ID}","WR_mstChartGroup_GetByID","GetChartGroupByID")
     except  Exception as E:
         CommanScript.ErrorLog("GetChartGroupByID",f"@ID={input.ID}","WR_mstChartGroup_GetByID",E)
         result.HasError=True
@@ -344,7 +347,7 @@ def ChartGroupAddEdit(input:WsInput.AddEditChartGroup):
         try:
             ID=0
             print('serviec')
-            ID=DBConfig.ExecuteNonQuery(input,"WR_mstChartGroup_AddEdit","ChartGroupAddEdit")
+            ID=DBConfig.CDBExecuteDataReader(input,"WR_mstChartGroup_AddEdit","ChartGroupAddEdit")
             if(ID>0):
                 result.Message.append("Chart Group Updated Sucessfully")
             elif(ID == -1):

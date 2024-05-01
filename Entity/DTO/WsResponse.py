@@ -27,3 +27,14 @@ class LoginResult(CommonResult):
     def __init__(self):
         super().__init__()
         self.UserName:str
+        
+class AuthenticationResult(CommonResult):
+    def __init__(self):
+        super().__init__()
+        self.Token:str
+        self.UserName:str 
+        
+class HttpRequestRes(CommonResult):
+    def __init__(self):
+        super().__init__()
+        self.IsValidToken=True
