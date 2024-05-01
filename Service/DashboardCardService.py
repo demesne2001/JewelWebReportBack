@@ -74,7 +74,7 @@ def GetCardValue(input:CardandChartInput):
         else:
             param+=f"@Grouping='{input.Grouping}'"
         print('param',param)
-        result.lstResult=DBConfig.CBDExecuteDataReader(param,"Wr_Dashboard_GetCard","GetCardValue")
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_Dashboard_GetCard","GetCardValue")
     except  Exception as E:        
         CommanScript.ErrorLog("GetCardValue",DBConfig.spParam(input),"Wr_Dashboard_GetCard",E)
         result.HasError=True
