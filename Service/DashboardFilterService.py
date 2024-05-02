@@ -354,7 +354,7 @@ def FilterGridAddEdit(input:AddEditFilterGrid):
         try:
             ID=0
             print('serviec')
-            ID=DBConfig.ExecuteNonQuery(input,"WR_mstFilterGrid_AddEdit","FilterGridAddEdit")
+            ID=DBConfig.CDBExecuteNonQuery(input,"WR_mstFilterGrid_AddEdit","FilterGridAddEdit")
             if(ID>0):
                 result.Message.append("FilterGrid Updated Sucessfully")
             elif(ID == -1):

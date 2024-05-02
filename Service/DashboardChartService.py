@@ -347,7 +347,7 @@ def ChartGroupAddEdit(input:WsInput.AddEditChartGroup):
         try:
             ID=0
             print('serviec')
-            ID=DBConfig.CDBExecuteDataReader(input,"WR_mstChartGroup_AddEdit","ChartGroupAddEdit")
+            ID=DBConfig.CDBExecuteNonQuery(input,"WR_mstChartGroup_AddEdit","ChartGroupAddEdit")
             if(ID>0):
                 result.Message.append("Chart Group Updated Sucessfully")
             elif(ID == -1):
