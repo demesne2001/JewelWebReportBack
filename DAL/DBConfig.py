@@ -149,11 +149,11 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
     print(param)  
     ID=0
     drivers = [item for item in pyodbc.drivers()]    
-    print(jwtBearer.CDBConnectionstring,'dbjwtBearer.CDBConnectionstring')
     # wconnection=pyodbc.connect(Connection.LiveConnection.value)
     if(jwtBearer.CDBConnectionstring ==""):
         wconnection=pyodbc.connect(Connection.LiveConnection.value)
     else:
+        print(jwtBearer.CDBConnectionstring,'dbjwtBearer.CDBConnectionstring')
         wconnection=pyodbc.connect(Connection.CDBConnection.value)
     try:
         cursor=wconnection.cursor()             
