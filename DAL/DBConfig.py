@@ -15,6 +15,9 @@ database2=config("DBName2")
 username2=config("DBUser2")
 password2=config("DBPass2")
 
+UserDB=jwtBearer.CDBConnectionstring
+userdbname=jwtBearer.CDbName
+
 print(server2)
 version='18'
 WRconnection = (
@@ -154,7 +157,7 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
     if(jwtBearer.CDBConnectionstring ==""):
         wconnection=pyodbc.connect(Connection.LiveConnection.value)
     else:
-        print(jwtBearer.CDBConnectionstring,'dbjwtBearer.CDBConnectionstring')
+        print(UserDB,'dbjwtBearer.CDBConnectionstring')
         wconnection=pyodbc.connect(Connection.CDBConnection.value)
     try:
         cursor=wconnection.cursor()             
