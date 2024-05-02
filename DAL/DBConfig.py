@@ -121,8 +121,7 @@ def CDBExecuteDataReader(param,spname,MethodNname):
     drivers = [item for item in pyodbc.drivers()]  
     if(jwtBearer.CDBConnectionstring ==""):
         connection=pyodbc.connect(Connection.LiveConnection.value)
-    else:
-        print('om patel',jwtBearer.CDBConnectionstring)        
+    else:             
         connection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
         
     try:        
@@ -135,8 +134,8 @@ def CDBExecuteDataReader(param,spname,MethodNname):
         cursor.close()
         connection.close()
     except Exception as e:
-        CommanScript.ErrorLog(MethodNname,param,spname,e)
-        print(MethodNname + 'Error :- ',e)
+        # CommanScript.ErrorLog(MethodNname,param,spname,e)
+        print('Error :- ',e)
         print('SQL Query',f"EXEC {spname} {param}")
         print('driver',drivers)
         connection.close()
@@ -161,7 +160,7 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
         ID=rows[0]        
         cursor.commit()
     except Exception as e:
-        CommanScript.ErrorLog('ExecuteNonQuery',input,spname,e)
+        # CommanScript.ErrorLog('ExecuteNonQuery',input,spname,e)
         print('Error :- ',e)
         print('SQL Query',f"EXEC {spname} {param}")
         print('driver',drivers)

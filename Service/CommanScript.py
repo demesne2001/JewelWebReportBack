@@ -32,8 +32,8 @@ def ErrorLog(MethodName:str,input:str,SpName:str,Error:str):
         
     except Exception as E:
         print(str(E))
-    finally:
-        ErrorFile.close()
+    
+        
         
     
     

@@ -248,7 +248,7 @@ def GetCommanChart(input:CardandChartInput):
             # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_BIrpt_Sales_GetChart","GetCommanChart")
         except  Exception as E:
-            CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
+            # CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
             result.HasError=True
             result.Message.append(str(E))
     else:
@@ -268,7 +268,7 @@ def GetDetailCommanChart(input:CardandChartInput):
         # result.lstResult=DBConfig.ExecuteDataReader(param,'Wr_BIrpt_Sales_GetChart',"GetCommanChart")
         result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_DetailWise_Chart","GetDetailCommanChart")
     except  Exception as E:
-        CommanScript.ErrorLog("GetDetailCommanChart",DBConfig.spParam(input),"WR_DetailWise_Chart",E)
+        # CommanScript.ErrorLog("GetDetailCommanChart",DBConfig.spParam(input),"WR_DetailWise_Chart",E)
         result.HasError=True
         result.Message.append(str(E))
     return result 
@@ -281,7 +281,7 @@ def GetDetailChartImage(input:ChartWiseImageInput):
             param=DBConfig.spParam(input)
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_GetBarcodeImage_GetByID","GetDetailChartImage")
         except  Exception as E:
-            CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
+            # CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
             result.HasError=True
             result.Message.append(str(E))
     else:
@@ -294,7 +294,7 @@ def GetChartOptionByID(input:GetByID):
         print(input.ID)
         result.lstResult=DBConfig.CDBExecuteDataReader(f"@ID={input.ID}","WR_mstChartOption_GetByID","GetChartOptionByID")
     except  Exception as E:
-        CommanScript.ErrorLog("GetChartOptionByID",f"@ID={input.ID}","WR_mstChartOption_GetByID",E)
+        # CommanScript.ErrorLog("GetChartOptionByID",f"@ID={input.ID}","WR_mstChartOption_GetByID",E)
         result.HasError=True
         result.Message.append(str(E))
     return result
@@ -319,7 +319,7 @@ def ChartOptionAddEdit(input:AddEditChartOption):
                 result.HasError=True
             
         except  Exception as E:
-            CommanScript.ErrorLog("ChartOptionAddEdit",DBConfig.spParam(input),"WR_mstChartOption_AddEdit",E)
+            # CommanScript.ErrorLog("ChartOptionAddEdit",DBConfig.spParam(input),"WR_mstChartOption_AddEdit",E)
             result.HasError=True
             result.Message.append(str(E))
     else:
@@ -332,7 +332,7 @@ def GetChartGroupByID(input:GetByID):
         print(input.ID)
         result.lstResult=DBConfig.CDBExecuteDataReader(f"@ID={input.ID}","WR_mstChartGroup_GetByID","GetChartGroupByID")
     except  Exception as E:
-        CommanScript.ErrorLog("GetChartGroupByID",f"@ID={input.ID}","WR_mstChartGroup_GetByID",E)
+        # CommanScript.ErrorLog("GetChartGroupByID",f"@ID={input.ID}","WR_mstChartGroup_GetByID",E)
         result.HasError=True
         result.Message.append(E)
     return result
@@ -357,7 +357,7 @@ def ChartGroupAddEdit(input:WsInput.AddEditChartGroup):
                 result.HasError=True
             
         except  Exception as E:
-            CommanScript.ErrorLog("ChartGroupAddEdit",DBConfig.spParam(input),"WR_mstChartGroup_AddEdit",E)
+            # CommanScript.ErrorLog("ChartGroupAddEdit",DBConfig.spParam(input),"WR_mstChartGroup_AddEdit",E)
             result.HasError=True
             result.Message.append(str(E))
     else:
