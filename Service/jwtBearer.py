@@ -35,11 +35,11 @@ class jwtBearer(HTTPBearer):
             global CVendorID
             global CDBConnectionstring
             global CDbName
-            print('payload',payload)
             CUserID=payload['UserID']
             CVendorID=payload['VendorID']
             CDBConnectionstring=payload['ConnectionString']
             CDbName=payload['DbName']
+            print('payload',CDBConnectionstring)
             isTokenValid=True
         print(isTokenValid)
         return isTokenValid
