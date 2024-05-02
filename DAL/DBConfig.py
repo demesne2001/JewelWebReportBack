@@ -127,8 +127,8 @@ def CDBExecuteDataReader(param,spname,MethodNname):
     if(jwtBearer.CDBConnectionstring ==""):
         connection=pyodbc.connect(Connection.LiveConnection.value)
     else:
-        print('om patel',CDBConnectionstring)
         print(Connection.CDBConnection.value,'cHECK')
+        print('om patel',CDBConnectionstring)
         connection=pyodbc.connect(Connection.CDBConnection.value)  
     try:
         cursor=connection.cursor()                   
