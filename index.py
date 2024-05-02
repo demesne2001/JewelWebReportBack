@@ -9,10 +9,10 @@ from Service.jwtBearer import jwtBearer
 app=FastAPI()
 
 
-app.include_router(DashboardFilter.Filter,prefix='/Filter')
-app.include_router(DashboardCard.Card,prefix='/Card')
-app.include_router(DashboardChart.Chart,prefix='/Chart')
-app.include_router(CommonController.Common,prefix='/Common')
+app.include_router(DashboardFilter.Filter,prefix='/Filter', dependencies=[Depends(jwtBearer())])
+app.include_router(DashboardCard.Card,prefix='/Card', dependencies=[Depends(jwtBearer())])
+app.include_router(DashboardChart.Chart,prefix='/Chart', dependencies=[Depends(jwtBearer())])
+app.include_router(CommonController.Common,prefix='/Common', dependencies=[Depends(jwtBearer())])
 app.include_router(Login.LoginController,prefix='/Login')
 origins=['*']
 app.add_middleware(CORSMiddleware,allow_origins=origins,allow_credentials=True,allow_methods=['*'],allow_headers=['*'],)

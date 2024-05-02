@@ -1,2 +1,3 @@
-tutorial-env
-tutorial-env\Lib
+/.venv
+/tutorial-env
+/tutorial-env\Lib
