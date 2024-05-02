@@ -28,7 +28,7 @@ class Connection(Enum):
     LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
     # LiveConnection=f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
     Connection=f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
-    CDBConnection=f'DRIVER=DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
+    CDBConnection=f'DRIVER=DRIVER=ODBC Driver 18 for SQL Server;SERVER={UserDB};DATABASE={userdbname};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
     
 # WRconnection = (
 #     f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
