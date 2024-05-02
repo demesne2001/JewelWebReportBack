@@ -1,3 +1,4 @@
 /.venv
 /tutorial-env
-/tutorial-env\Lib
+/tutorial-env/Lib
+/__pycache__

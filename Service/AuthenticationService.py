@@ -100,6 +100,7 @@ def Authentication(input:Login):
     elif(input.PassWord == ""):
       result.Message.append("Enter Your Password")
     if(len(result.Message)==0):
+      try:
         lstresult=[]
         param=f"@LoginID='{input.LoginID}'"        
         lstresult=DBConfig.ExecuteDataReader(param,"WR_mstuser_GetAuth","Authentication")       
@@ -117,6 +118,9 @@ def Authentication(input:Login):
         else:
             result.HasError=True
             result.Message.append("Invalid User....!")
+      except Exception as E:
+        result.HasError=True
+        result.Message.append(str(E))
     else:
         pass
     return result
