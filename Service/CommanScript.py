@@ -6,17 +6,19 @@ Count=1
 
 FilePath="Utility/Logfile/"
 
-def ErrorLog(MethodName,input,SpName,Error):
-    print("Conditiontrue")
-    result=WsResponse.ErrorLog()    
+def ErrorLog(MethodName:str,input:str,SpName:str,Error:str):    
+    result=WsResponse.ErrorLog()   
+    if(MethodName ==""):
+        MethodName=str(datetime.now())
     try:
         if(os.path.exists(FilePath+str(date.today()))):
             pass
         else:
             os.makedirs(FilePath+str(date.today()))
         
+        print(MethodName,'log') 
         print(str(datetime.now()))
-        result.ErrorMethod=str(MethodName)
+        result.ErrorMethod=str(MethodName).strip()
         result.ErrorDate=str(datetime.now())
         result.ErrorException=str(Error)
         result.ErrorParam=str(input)
@@ -30,6 +32,8 @@ def ErrorLog(MethodName,input,SpName,Error):
         
     except Exception as E:
         print(str(E))
+    finally:
+        ErrorFile.close()
         
     
     

@@ -15,8 +15,7 @@ database2=config("DBName2")
 username2=config("DBUser2")
 password2=config("DBPass2")
 
-UserDB=jwtBearer.CDBConnectionstring
-userdbname=jwtBearer.CDbName
+
 
 print(server2)
 version='18'
@@ -28,7 +27,7 @@ class Connection(Enum):
     LiveConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
     # LiveConnection=f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
     Connection=f'DRIVER=SQL Server;SERVER={server2};DATABASE={database2};UID={username2};PWD={password2};'
-    CDBConnection=f'DRIVER=DRIVER=ODBC Driver 18 for SQL Server;SERVER={UserDB};DATABASE={userdbname};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
+    # CDBConnection=f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={UserDB};DATABASE={userdbname};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;'
     
 # WRconnection = (
 #     f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')
@@ -75,6 +74,7 @@ def ExecuteNonQuery(input,spname,MethodNname):
     print(drivers)    
     wconnection=pyodbc.connect(Connection.LiveConnection.value)
     # wconnection=pyodbc.connect(Connection.Connection.value)
+    
     try:
         cursor=wconnection.cursor()             
         cursor.execute(f"EXEC {spname} {param}")        
@@ -95,9 +95,7 @@ def ExecuteNonQuery(input,spname,MethodNname):
 
 def ExecuteDataReader(param,spname,MethodNname):    
     key_value_pairs=[]
-    
     drivers = [item for item in pyodbc.drivers()]  
-   
     connection=pyodbc.connect(Connection.LiveConnection.value)
     # connection=pyodbc.connect(Connection.Connection.value)
     print(drivers)
@@ -120,18 +118,15 @@ def ExecuteDataReader(param,spname,MethodNname):
 
 def CDBExecuteDataReader(param,spname,MethodNname):    
     key_value_pairs=[]
-    
     drivers = [item for item in pyodbc.drivers()]  
-   
-    # connection=pyodbc.connect(Connection.LiveConnection.value)
     if(jwtBearer.CDBConnectionstring ==""):
         connection=pyodbc.connect(Connection.LiveConnection.value)
     else:
-        print(Connection.CDBConnection.value,'cHECK')
-        print('om patel',CDBConnectionstring)
-        connection=pyodbc.connect(Connection.CDBConnection.value)  
-    try:
-        cursor=connection.cursor()                   
+        print('om patel',jwtBearer.CDBConnectionstring)        
+        connection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
+        
+    try:        
+        cursor=connection.cursor() 
         cursor.execute(f"EXEC {spname} {param}")
         columns = [column[0] for column in cursor.description]
         rows = cursor.fetchall()          
@@ -140,7 +135,7 @@ def CDBExecuteDataReader(param,spname,MethodNname):
         cursor.close()
         connection.close()
     except Exception as e:
-        CommanScript.ErrorLog("ExecuteDataReader",param,spname,e)
+        CommanScript.ErrorLog(MethodNname,param,spname,e)
         print(MethodNname + 'Error :- ',e)
         print('SQL Query',f"EXEC {spname} {param}")
         print('driver',drivers)
@@ -153,12 +148,11 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
     print(param)  
     ID=0
     drivers = [item for item in pyodbc.drivers()]    
-    # wconnection=pyodbc.connect(Connection.LiveConnection.value)
+   
     if(jwtBearer.CDBConnectionstring ==""):
         wconnection=pyodbc.connect(Connection.LiveConnection.value)
-    else:
-        print(UserDB,'dbjwtBearer.CDBConnectionstring')
-        wconnection=pyodbc.connect(Connection.CDBConnection.value)
+    else:       
+        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
     try:
         cursor=wconnection.cursor()             
         cursor.execute(f"EXEC {spname} {param}")        
@@ -167,8 +161,8 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
         ID=rows[0]        
         cursor.commit()
     except Exception as e:
-        CommanScript.ErrorLog("ExecuteNonQuery",input,spname,e)
-        print(MethodNname + 'Error :- ',e)
+        CommanScript.ErrorLog('ExecuteNonQuery',input,spname,e)
+        print('Error :- ',e)
         print('SQL Query',f"EXEC {spname} {param}")
         print('driver',drivers)
         cursor.rollback()   

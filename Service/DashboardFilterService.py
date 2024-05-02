@@ -17,7 +17,7 @@ def GetBranch(input:CardandChartInput):
         param +=f" @Search='{input.Search}'"        
         result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_MstBranch_GetForHelp","")
     except  Exception as E:
-        CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
+        # CommanScript.ErrorLog("GetCommanChart",DBConfig.spParam(input),"Wr_BIrpt_Sales_GetChart",E)
         print(str(E))
         result.HasError=True
         result.Message.append(str(E))
