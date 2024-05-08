@@ -5,6 +5,7 @@ from io import BytesIO
 import base64
 import time
 import jwt
+from fastapi import HTTPException
 # import pprp.crypto
 from Entity.DTO.WsInput import Login
 from Entity.DTO.WsResponse import LoginResult,AuthenticationResult 
