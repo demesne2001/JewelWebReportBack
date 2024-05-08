@@ -138,3 +138,19 @@ def TokenGenrater(input):
       return token
     
     
+def get_key(key):
+    if len(key) >= ENCRYPTION_KEY_BYTES:
+        print(key[:ENCRYPTION_KEY_BYTES])
+        return key[:ENCRYPTION_KEY_BYTES].encode('utf-8')        
+    else:
+        return key.ljust(ENCRYPTION_KEY_BYTES, b'0')
+
+def encrypt(value):
+    try:
+        cipher = AES.new(get_key(ENCRYPTION_KEY), AES.MODE_CBC, ENCRYPTION_INIT_VECTOR.encode('utf-8'))
+       
+        padded_value = value + (ENCRYPTION_KEY_BYTES - len(value) % ENCRYPTION_KEY_BYTES) * b'\0'
+        ciphertext = cipher.encrypt(padded_value)
+        return base64.b64encode(ciphertext).decode()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

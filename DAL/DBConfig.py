@@ -96,8 +96,8 @@ def ExecuteNonQuery(input,spname,MethodNname):
 def ExecuteDataReader(param,spname,MethodNname):    
     key_value_pairs=[]
     drivers = [item for item in pyodbc.drivers()]  
-    connection=pyodbc.connect(Connection.LiveConnection.value)
-    # connection=pyodbc.connect(Connection.Connection.value)
+    # connection=pyodbc.connect(Connection.LiveConnection.value)
+    connection=pyodbc.connect(Connection.Connection.value)
     print(drivers)
     try:
         cursor=connection.cursor()                   
@@ -121,8 +121,9 @@ def CDBExecuteDataReader(param,spname,MethodNname):
     drivers = [item for item in pyodbc.drivers()]  
     if(jwtBearer.CDBConnectionstring ==""):
         connection=pyodbc.connect(Connection.LiveConnection.value)
+        # connection=pyodbc.connect(Connection.Connection.value)
     else:             
-        connection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
+        connection=pyodbc.connect(f'DRIVER=SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')      
         
     try:        
         cursor=connection.cursor() 

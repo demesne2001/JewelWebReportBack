@@ -97,3 +97,10 @@ class AddEditChartGroup(BaseModel):
 class Login(BaseModel):
     LoginID:str
     PassWord:str
+    
+class SchedulechartInput(BaseModel):
+    FromDate:str
+    Todate:str
+    strBranchID:str
+    Unit:str
+    Mode:int
