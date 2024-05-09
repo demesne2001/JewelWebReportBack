@@ -104,3 +104,7 @@ class SchedulechartInput(BaseModel):
     strBranchID:str
     Unit:str
     Mode:int
+    
+class ScheduleDetailInput(BaseModel):
+    TravellingTeamID:int
+    Mode:int

@@ -1,5 +1,5 @@
 from DAL import DBConfig
-from Entity.DTO.WsInput import SchedulechartInput
+from Entity.DTO.WsInput import SchedulechartInput,ScheduleDetailInput
 from Entity.DTO.WsResponse import CommanChartFilterResult
 
 
@@ -22,6 +22,18 @@ def GetCardWise(input:SchedulechartInput):
         param=""
         param=DBConfig.spParam(input)
         result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_Schedule_GetCard","GetCardWise")
+    except  Exception as E:
+        print(E)
+        result.HasError=True
+        result.Message.append(E)
+    return result 
+
+def GetChartDetailWise(input:ScheduleDetailInput):
+    result=CommanChartFilterResult()
+    try:
+        param=""
+        param=DBConfig.spParam(input)
+        result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_Schedule_GetDetailChart","GetChartDetailWise")
     except  Exception as E:
         print(E)
         result.HasError=True
