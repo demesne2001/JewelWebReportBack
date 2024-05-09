@@ -96,8 +96,8 @@ def ExecuteNonQuery(input,spname,MethodNname):
 def ExecuteDataReader(param,spname,MethodNname):    
     key_value_pairs=[]
     drivers = [item for item in pyodbc.drivers()]  
-    # connection=pyodbc.connect(Connection.LiveConnection.value)
-    connection=pyodbc.connect(Connection.Connection.value)
+    connection=pyodbc.connect(Connection.LiveConnection.value)
+    # connection=pyodbc.connect(Connection.Connection.value)
     print(drivers)
     try:
         cursor=connection.cursor()                   
