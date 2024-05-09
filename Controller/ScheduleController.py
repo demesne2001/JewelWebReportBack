@@ -14,4 +14,4 @@ def GetcommonChart(input:SchedulechartInput):
 
 @Schedule.post('/GetChartDetailWise')
 def GetcommonChart(input:ScheduleDetailInput):
-    return ScheduleService.GetCardWise(input)
+    return ScheduleService.GetChartDetailWise(input)
