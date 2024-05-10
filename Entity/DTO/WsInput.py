@@ -107,4 +107,11 @@ class SchedulechartInput(BaseModel):
     
 class ScheduleDetailInput(BaseModel):
     TravellingTeamID:int
-    Mode:int
+    Mode:int 
+
+class ScheduleAllDetailInput(BaseModel):
+    TravellingTeamID:int | None= Field(default=0)
+    
+class SchedulePartyDetailInput(BaseModel):
+    ScheduleID:int
+    Mode:int 
