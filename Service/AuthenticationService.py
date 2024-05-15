@@ -112,6 +112,7 @@ def Authentication(input:Login):
             if(input.PassWord==decrypt(lstresult[0]['Password'])):                
                 result.Token=TokenGenrater(lstresult[0])
                 result.UserName=lstresult[0]['UserName']
+                result.PageName=lstresult[0]['PageName']
             else:
               result.HasError=True
               result.Message.append("Invalid Password....!")

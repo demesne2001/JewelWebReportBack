@@ -33,8 +33,14 @@ class AuthenticationResult(CommonResult):
         super().__init__()
         self.Token:str
         self.UserName:str 
+        self.PageName:str
         
 class HttpRequestRes(CommonResult):
     def __init__(self):
         super().__init__()
         self.IsValidToken=True
+        
+class DynamicResult(CommonResult):
+    def __init__(self):
+        super().__init__()
+        self.lstResult:[]

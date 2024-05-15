@@ -123,7 +123,7 @@ def CDBExecuteDataReader(param,spname,MethodNname):
         connection=pyodbc.connect(Connection.LiveConnection.value)
         # connection=pyodbc.connect(Connection.Connection.value)
     else:             
-        connection=pyodbc.connect(f'DRIVER=SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')      
+        connection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')      
         
     try:        
         cursor=connection.cursor() 
@@ -152,7 +152,7 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
     if(jwtBearer.CDBConnectionstring ==""):
         wconnection=pyodbc.connect(Connection.LiveConnection.value)
     else:       
-        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
+        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')      
     try:
         cursor=wconnection.cursor()             
         cursor.execute(f"EXEC {spname} {param}")        
@@ -170,6 +170,31 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
         cursor.close()
         wconnection.close()
     return ID
+
+def GetDynamicSpName(ID:str):
+    if(jwtBearer.CDBConnectionstring ==""):
+        wconnection=pyodbc.connect(Connection.LiveConnection.value)
+    else:       
+        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')         
+    SpNameOut=""
+    try:
+        param=""
+        param +=f"@ID={ID},@VendorID={jwtBearer.CVendorID}"
+        cursor=wconnection.cursor()             
+        cursor.execute(f"EXEC WR_mstVendorDynamicChart_GetchartDetail {param}") 
+        rows = cursor.fetchone() 
+        print(rows)
+        SpNameOut=rows[0]        
+        cursor.commit()
+    except Exception as e:
+        print('GetDynamicSpName',str(e))
+        cursor.rollback()
+    finally:
+        cursor.close()
+        wconnection.close()  
+    return SpNameOut    
+
+
 
 # def ExecuteDataReader(param,spname,MethodNname,Result2):
 #     key_value_pairs=[]

@@ -115,3 +115,55 @@ class ScheduleAllDetailInput(BaseModel):
 class SchedulePartyDetailInput(BaseModel):
     ScheduleID:int
     Mode:int 
+    
+class CommonFilter(BaseModel):
+    strBranchID:str | None= Field(default="")
+    strCompanyID:str | None= Field(default="")
+    strStateID:str| None= Field(default="")
+    strCityID:str| None= Field(default="")
+    strItemID:str| None= Field(default="")
+    strSubItemID:str| None= Field(default="")
+    strItemGroupID:str| None= Field(default="")
+    strRegionID:str| None= Field(default="")
+    strItemSubitemID:str| None= Field(default="")
+    strPurchasePartyID:str| None= Field(default="")
+    strSalesPartyID:str| None= Field(default="")
+    strSalemanID:str| None= Field(default="")
+    strProductID:str| None= Field(default="")
+    strDesignCodeID:str| None= Field(default="")
+    strDesignCatalogueID:str| None= Field(default="")
+    strSaleAging:str| None= Field(default="")
+    strModeofSale:str| None= Field(default="")
+    strTeamModeofSale:str| None= Field(default="")
+    FromDate:str| None= Field(default="")
+    ToDate:str| None= Field(default="")
+    strMetalType:str| None= Field(default="")
+    strDayBookID:str| None= Field(default="")
+    strMonth:str| None= Field(default="")
+    strFinYear:str| None= Field(default="")
+    Unity:str| None=Field(default="G")
+    DychartID:int| None=Field(default=0)
+    
+    
+class VendorAddEditInput(BaseModel):
+    VendorID:int| None=Field(default=0)
+    VendorName:str
+    VendorStaticIP:str
+    VendorDBName:str
+    PageName:str
+    
+class VendorChartAddEdit(BaseModel):
+    DychartID:int| None=Field(default=0)
+    VendorID:int
+    RowNo:int
+    RowCHartcount:int
+    RSrno:int
+    ChartLabel:str
+    XLabel:str
+    Ylabel:str
+    SpName:str
+    Chartoption:str
+    
+class VendorChartInput(BaseModel):
+    lstChartDetail : list[VendorChartAddEdit]
+    
