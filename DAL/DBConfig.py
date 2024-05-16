@@ -123,7 +123,7 @@ def CDBExecuteDataReader(param,spname,MethodNname):
         connection=pyodbc.connect(Connection.LiveConnection.value)
         # connection=pyodbc.connect(Connection.Connection.value)
     else:             
-        connection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')      
+        connection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
         
     try:        
         cursor=connection.cursor() 
@@ -152,7 +152,7 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
     if(jwtBearer.CDBConnectionstring ==""):
         wconnection=pyodbc.connect(Connection.LiveConnection.value)
     else:       
-        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')      
+        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
     try:
         cursor=wconnection.cursor()             
         cursor.execute(f"EXEC {spname} {param}")        
@@ -175,7 +175,7 @@ def GetDynamicSpName(ID:str):
     if(jwtBearer.CDBConnectionstring ==""):
         wconnection=pyodbc.connect(Connection.LiveConnection.value)
     else:       
-        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')         
+        wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')         
     SpNameOut=""
     try:
         param=""
