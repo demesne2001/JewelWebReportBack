@@ -26,15 +26,19 @@ def GetChartValue(input:CommonFilter):
     return result
 
 
-def GetChartDetail(VendorID:int):
+def GetChartDetail(input:VendorPageDetDataInput):
     result=DynamicResult()        
     if(len(result.Message)==0):
         try:
             param=""
-            if(VendorID>0):
-                param=f"@VendorID={VendorID}"
+            if(input.VendorID>0):
+                param=f"@VendorID={input.VendorID}"
             else:
                 param=f"@VendorID={jwtBearer.CVendorID}"
+            if(input.PageID>0):
+                param=f"@PageID={input.PageID}"
+            else:
+                param=f"@PageID=0"
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstVendorDynamicChart_GetDetailByVendorID","GetChartValue")
         except  Exception as E:                    
             result.HasError=True

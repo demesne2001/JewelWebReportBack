@@ -11,8 +11,8 @@ def GetcommonChart(input:CommonFilter):
     return DynamicService.GetChartValue(input)
 
 @Dynamic.post('/GetcommonChartDetail')
-def GetcommonChartDetail(VendorID :int=0):
-    return DynamicService.GetChartDetail(VendorID)
+def GetcommonChartDetail(input:VendorPageDetDataInput):
+    return DynamicService.GetChartDetail(input)
 
 @Dynamic.post('/GetVendorDetail')
 def GetVendorDetail(VendorID :int=0):
