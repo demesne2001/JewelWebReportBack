@@ -124,6 +124,7 @@ def CDBExecuteDataReader(param,spname,MethodNname):
         # connection=pyodbc.connect(Connection.Connection.value)
     else:             
         connection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')      
+        # connection=pyodbc.connect(f'DRIVER=SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')      
         
     try:        
         cursor=connection.cursor() 
