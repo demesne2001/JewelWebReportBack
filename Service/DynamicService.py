@@ -1,5 +1,5 @@
 from DAL import DBConfig
-from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,VendorChartInput
+from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,VendorChartInput,VendorPageDetDataInput
 from Entity.DTO.WsResponse import DynamicResult
 from Service import jwtBearer
 
@@ -53,6 +53,28 @@ def GetVendorDetailByID(VendorID:int):
             else:
                 param=f"@VendorID={jwtBearer.CVendorID}"
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_MstVendor_GetByID","GetVendorDetailByID")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result
+
+def VendorPageDataServiec(input:VendorPageDetDataInput):
+    result=DynamicResult()        
+    if(len(result.Message)==0):
+        try:
+            param=""
+            if(input.VendorID>0):
+                param=f"@VendorID={input.VendorID}"
+            else:
+                param=f"@VendorID={jwtBearer.CVendorID}"
+                
+            if(input.PageID>0):
+                param=f"@PageID={input.PageID}"
+            else:
+                param=f"@PageID=0"
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_MstVendorPage_GetData","VendorPageDataServiec")
         except  Exception as E:                    
             result.HasError=True
             result.Message.append(str(E))

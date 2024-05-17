@@ -167,3 +167,6 @@ class VendorChartAddEdit(BaseModel):
 class VendorChartInput(BaseModel):
     lstChartDetail : list[VendorChartAddEdit]
     
+class VendorPageDetDataInput(BaseModel):
+    VendorID:int | None=Field(default=0)
+    PageID:int | None=Field(default=0)
