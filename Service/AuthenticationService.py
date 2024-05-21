@@ -9,8 +9,8 @@ import jwt
 from fastapi import HTTPException
 # import pprp.crypto
 from Crypto import Random
-from Entity.DTO.WsInput import Login,UserAddEditInput
-from Entity.DTO.WsResponse import LoginResult,AuthenticationResult,UserAddEditResult 
+from Entity.DTO.WsInput import Login,UserAddEditInput,GetUserInput
+from Entity.DTO.WsResponse import LoginResult,AuthenticationResult,UserAddEditResult ,CommanChartFilterResult,CommanListingResult
 from decouple import config
 
 JWT_KEY=config("secret")
@@ -193,8 +193,8 @@ def AddEditUser(input:UserAddEditInput):
         result.Message.append("UserName is Required")
     elif(input.Password==''):
         result.Message.append("UserName is Required")
-    elif(input.VendorID<=0):
-        result.Message.append("VendorID is Required")    
+    # elif(input.VendorID<=0):
+    #     result.Message.append("VendorID is Required")    
     if(len(result.Message)==0):
         try:
           ID=0          
@@ -212,6 +212,25 @@ def AddEditUser(input:UserAddEditInput):
             print("Error",e)
             result.HasError=True
             result.Message.append(str(e))
+    else:
+        result.HasError=True
+    return result
+  
+def GetUserData(input:GetUserInput):
+    result=CommanListingResult()        
+    if(len(result.Message)==0):
+        try:
+            param=""
+            if(input.VendorID>0):
+                param=f"@VendorID={input.VendorID}"          
+                
+            if(input.UserID>0):
+                param=f"@UserID={input.UserID}"
+            
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstUser_GetUserData","VendorchartDetailScreen")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
     else:
         result.HasError=True
     return result

@@ -10,6 +10,11 @@ class CommanChartFilterResult(CommonResult):
         super().__init__()
         self.lstResult:[] 
         
+class CommanListingResult(CommonResult):
+    def __init__(self):
+        super().__init__()
+        self.lstResult:[]        
+         
 class ErrorLog(BaseModel):
     def __init__(self):
         self.ErrorDate:str

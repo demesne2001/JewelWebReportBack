@@ -1,6 +1,6 @@
 import os
 from fastapi import APIRouter,Body,Depends,HTTPException
-from Entity.DTO.WsInput import UploadFile,DeleteFile,GetPDfUsingImageInput,Login,UserAddEditInput
+from Entity.DTO.WsInput import UploadFile,DeleteFile,GetPDfUsingImageInput,Login,UserAddEditInput,GetUserInput
 from Service import AuthenticationService
 LoginController=APIRouter()
 
@@ -22,6 +22,12 @@ async def encrypt_value(value: str):
 async def AddEditUser(input: UserAddEditInput):
     try:        
         return AuthenticationService.AddEditUser(input)
+    except HTTPException as e:
+        raise e
+@LoginController.post("/GetUserData")
+async def GetUserData(input: GetUserInput):
+    try:        
+        return AuthenticationService.GetUserData(input)
     except HTTPException as e:
         raise e
     
