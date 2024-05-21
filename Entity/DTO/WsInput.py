@@ -168,5 +168,15 @@ class VendorChartInput(BaseModel):
     lstChartDetail : list[VendorChartAddEdit]
     
 class VendorPageDetDataInput(BaseModel):
-    VendorID:int | None=Field(default=0)
-    PageID:int | None=Field(default=0)
+    VendorID:int 
+    PageID:int
+    
+class VendorchartDetailScreenInput(BaseModel):
+    VendorID:int 
+    DyChartID:int
+    
+    
+class VendorchartDetailInput(BaseModel):
+    VendorID:int
+    DyChartDetailID:int
+    ID:int

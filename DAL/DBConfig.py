@@ -172,17 +172,18 @@ def CDBExecuteNonQuery(input,spname,MethodNname):
         wconnection.close()
     return ID
 
-def GetDynamicSpName(ID:str):
+def GetDynamicSpName(ID:str,SpName:str):
     if(jwtBearer.CDBConnectionstring ==""):
         wconnection=pyodbc.connect(Connection.LiveConnection.value)
     else:       
         wconnection=pyodbc.connect(f'DRIVER=ODBC Driver 18 for SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};TrustServerCertificate=yes;Encrypt=no;Connection Timeout=30;')         
+        # wconnection=pyodbc.connect(f'DRIVER=SQL Server;SERVER={jwtBearer.CDBConnectionstring};DATABASE={jwtBearer.CDbName};UID={username2};PWD={password2};')         
     SpNameOut=""
     try:
         param=""
         param +=f"@ID={ID},@VendorID={jwtBearer.CVendorID}"
         cursor=wconnection.cursor()             
-        cursor.execute(f"EXEC WR_mstVendorDynamicChart_GetchartDetail {param}") 
+        cursor.execute(f"EXEC {SpName} {param}") 
         rows = cursor.fetchone() 
         print(rows)
         SpNameOut=rows[0]        

@@ -1,5 +1,5 @@
 from DAL import DBConfig
-from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,VendorChartInput,VendorPageDetDataInput
+from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,VendorChartInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
 from Entity.DTO.WsResponse import DynamicResult
 from Service import jwtBearer
 
@@ -7,7 +7,7 @@ from Service import jwtBearer
 
 def GetChartValue(input:CommonFilter):
     result=DynamicResult()
-    SpName=DBConfig.GetDynamicSpName(input.DychartID)
+    SpName=DBConfig.GetDynamicSpName(input.DychartID,'WR_mstVendorDynamicChart_GetchartDetail')
     if(SpName == "" or SpName == None or len(SpName)<=0):
         result.Message.append("Please contact to Support Department")
     if(len(result.Message)==0):
@@ -25,16 +25,39 @@ def GetChartValue(input:CommonFilter):
         result.HasError=True
     return result
 
+def GetChartDetailValue(input:VendorchartDetailInput):
+    result=DynamicResult()
+    print('inputttt',input)
+    SpName=DBConfig.GetDynamicSpName(input.DyChartDetailID,'WR_mstVendorDynamicChartDetail_GetchartDetail')
+    if(SpName == "" or SpName == None or len(SpName)<=0):
+        result.Message.append("Please contact to Support Department")
+    if(len(result.Message)==0):
+        try:
+            param="" 
+            input.DyChartDetailID=0                   
+            param=DBConfig.spParam(input)        
+            print('param',param)
+            print('SpName',SpName)
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,SpName,"GetChartDetailValue")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result
+
 
 def GetChartDetail(input:VendorPageDetDataInput):
-    result=DynamicResult()        
+    result=DynamicResult()  
+    if(input.PageID<=0)      :
+        result.Message.append("PageNo Required.......!!")
     if(len(result.Message)==0):
         try:
             param=""
             if(input.VendorID>0):
                 param=f"@VendorID={input.VendorID},"
             else:
-                param=f"@VendorID={jwtBearer.CVendorID},"
+                param=f"@VendorID={jwtBearer.CVendorID},"                
             if(input.PageID>0):
                 param+=f"@PageID={input.PageID}"
             else:
@@ -80,6 +103,29 @@ def VendorPageDataServiec(input:VendorPageDetDataInput):
             else:
                 param=f"@PageID=0"
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_MstVendorPage_GetData","VendorPageDataServiec")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result
+
+def VendorchartDetailScreen(input:VendorchartDetailScreenInput):
+    result=DynamicResult()        
+    if(len(result.Message)==0):
+        try:
+            param=""
+            if(input.VendorID>0):
+                param=f"@VendorID={input.VendorID}"
+            else:
+                param=f"@VendorID={jwtBearer.CVendorID}"
+                
+            if(input.DyChartID>0):
+                param=f"@DyChartID={input.DyChartID}"
+            else:
+                param=f"@DyChartID=0"
+            print(param,' ommmmm')
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstVendorDynamicChartDetail_GetData","VendorchartDetailScreen")
         except  Exception as E:                    
             result.HasError=True
             result.Message.append(str(E))
