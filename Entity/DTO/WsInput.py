@@ -165,7 +165,7 @@ class VendorChartAddEdit(BaseModel):
     DyChartID:int| None=Field(default=0)
     VendorID:int
     RowNo:int
-    RowChartcount:int
+    RowChartCount:int
     RSrNo:int
     ChartLabel:str
     XLabel:str
