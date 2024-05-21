@@ -100,9 +100,9 @@ def VendorPageDataServiec(input:VendorPageDetDataInput):
                 param=f"@VendorID={jwtBearer.CVendorID}"
                 
             if(input.PageID>0):
-                param+=f"@PageID={input.PageID}"
+                param+=f",@PageID={input.PageID}"
             else:
-                param+=f"@PageID=0"
+                param+=f",@PageID=0"
             print('param',param)
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_MstVendorPage_GetData","VendorPageDataServiec")
             print('result',result)
