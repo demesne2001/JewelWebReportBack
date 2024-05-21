@@ -98,6 +98,15 @@ class Login(BaseModel):
     LoginID:str
     PassWord:str
     
+class UserAddEditInput(BaseModel):
+    UserID:int
+    LoginID:str
+    Password:str
+    UserName:str
+    VendorID:int
+    
+    
+    
 class SchedulechartInput(BaseModel):
     FromDate:str
     Todate:str
@@ -153,16 +162,18 @@ class VendorAddEditInput(BaseModel):
     PageName:str
     
 class VendorChartAddEdit(BaseModel):
-    DychartID:int| None=Field(default=0)
+    DyChartID:int| None=Field(default=0)
     VendorID:int
     RowNo:int
-    RowCHartcount:int
-    RSrno:int
+    RowChartcount:int
+    RSrNo:int
     ChartLabel:str
     XLabel:str
-    Ylabel:str
-    SpName:str
-    Chartoption:str
+    YLabel:str
+    SPName:str
+    PageID:int
+    XLabelID:str
+    ChartOption:str
     
 class VendorChartInput(BaseModel):
     lstChartDetail : list[VendorChartAddEdit]
