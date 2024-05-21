@@ -162,10 +162,10 @@ def VendorChartAddEdit(input:VendorChartInput):
         rowcount+=1        
         if(rowcount ==1):
             RowNo=item.RowNo
-        if(item.RowCHartcount == rowcount and item.RowNo==RowNo):
+        if(item.RowChartcount == rowcount and item.RowNo==RowNo):
             RowNo=0
             rowcount=0
-        elif(item.RowCHartcount != rowcount ):
+        elif(item.RowChartcount != rowcount ):
             if(counter < len(input.lstChartDetail)-1): 
                 index=counter+1
                 print('*********',index)
