@@ -4,11 +4,13 @@ from DAL import DBConfig
 from io import BytesIO
 import base64
 import time
+from Crypto.Hash import SHA256
 import jwt
 from fastapi import HTTPException
 # import pprp.crypto
-from Entity.DTO.WsInput import Login
-from Entity.DTO.WsResponse import LoginResult,AuthenticationResult 
+from Crypto import Random
+from Entity.DTO.WsInput import Login,UserAddEditInput
+from Entity.DTO.WsResponse import LoginResult,AuthenticationResult,UserAddEditResult 
 from decouple import config
 
 JWT_KEY=config("secret")
@@ -108,8 +110,9 @@ def Authentication(input:Login):
         if(len(lstresult)>0):
           # for row in lstresult[0]:
             obj=lstresult[0]
-            print('obj',lstresult[0]['Password'])
-            if(input.PassWord==decrypt(lstresult[0]['Password'])):                
+            print('obj',input.PassWord)
+            print('decrobj',decryptPass(lstresult[0]['Password']))
+            if(input.PassWord==str(decryptPass(lstresult[0]['Password']))):                
                 result.Token=TokenGenrater(lstresult[0])
                 result.UserName=lstresult[0]['UserName']
                 result.PageName=lstresult[0]['PageName']
@@ -156,3 +159,59 @@ def encrypt(value):
         return base64.b64encode(ciphertext).decode()
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+      
+def encryptPass(source, encode=True):
+    key = SHA256.new( str.encode(ENCRYPTION_KEY)).digest()  # use SHA-256 over our key to get a proper-sized AES key
+    # IV = Random.new().read(AES.block_size)  # generate IV
+    encryptor = AES.new(key, AES.MODE_CBC, str.encode(ENCRYPTION_INIT_VECTOR))
+    source=str.encode(source)
+    padding = AES.block_size - len(source) % AES.block_size  # calculate needed padding
+       
+    source += bytes([padding]) * padding  # Python 2.x: source += chr(padding) * padding
+    data = str.encode(ENCRYPTION_INIT_VECTOR) + encryptor.encrypt(source)  # store the IV at the beginning and encrypt
+    return base64.b64encode(data).decode("latin-1") if encode else data
+
+
+def decryptPass(source, decode=True):
+    if decode:
+        source = base64.b64decode(source.encode("latin-1"))
+    key = SHA256.new(str.encode(ENCRYPTION_KEY)).digest()  # use SHA-256 over our key to get a proper-sized AES key
+    IV = source[:AES.block_size]  # extract the IV from the beginning
+    decryptor = AES.new(key, AES.MODE_CBC, str.encode(ENCRYPTION_INIT_VECTOR))
+    data = decryptor.decrypt(source[AES.block_size:])  # decrypt
+    padding = data[-1]  # pick the padding value from the end; Python 2.x: ord(data[-1])    
+    if data[-padding:] != bytes([padding]) * padding:  # Python 2.x: chr(padding) * padding
+        raise ValueError("Invalid padding...")
+    return data[:-padding].decode("utf-8")
+  
+  
+def AddEditUser(input:UserAddEditInput):
+    result=UserAddEditResult()
+    if(input.LoginID==''):
+        result.Message.append("LoginID is Required")
+    elif(input.UserName==''):
+        result.Message.append("UserName is Required")
+    elif(input.Password==''):
+        result.Message.append("UserName is Required")
+    elif(input.VendorID<=0):
+        result.Message.append("VendorID is Required")    
+    if(len(result.Message)==0):
+        try:
+          ID=0          
+          input.Password=encryptPass(input.Password)
+          ID=DBConfig.CDBExecuteNonQuery(input,"WR_mstUser_AddEdit","AddEditUser")
+          if(ID>0):
+            result.Message.append("User Detail Fill sucessfully")
+          elif(ID==-1):
+            result.Message.append("LoginID IS already Exists")
+            result.HasError=True
+          else:
+            result.Message.append("Something went wrong.....")
+            result.HasError=True
+        except Exception as e:
+            print("Error",e)
+            result.HasError=True
+            result.Message.append(str(e))
+    else:
+        result.HasError=True
+    return result

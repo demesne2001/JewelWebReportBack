@@ -1,6 +1,6 @@
 from fastapi import APIRouter,Body,Depends
 from Service import DynamicService
-from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,VendorChartInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
+from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,VendorChartInput,AddEditVendorPageInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
 from Entity.DTO.WsResponse import DynamicResult
 
 
@@ -45,3 +45,7 @@ def VendorchartDetailScreen(input:VendorchartDetailScreenInput):
 @Dynamic.post('/CommanVendorchartDetail')
 def CommanVendorchartDetail(input:VendorchartDetailInput):
     return DynamicService.GetChartDetailValue(input)
+
+@Dynamic.post('/AddEditVendorPage')
+def AddEditVendorPage(input:AddEditVendorPageInput):
+    return DynamicService.AddEditVendorPage(input)

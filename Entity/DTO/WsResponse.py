@@ -44,3 +44,8 @@ class DynamicResult(CommonResult):
     def __init__(self):
         super().__init__()
         self.lstResult:[]
+        
+        
+class UserAddEditResult(CommonResult):
+    def __init__(self):
+        super().__init__()

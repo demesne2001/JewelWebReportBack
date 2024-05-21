@@ -99,11 +99,11 @@ class Login(BaseModel):
     PassWord:str
     
 class UserAddEditInput(BaseModel):
-    UserID:int
-    LoginID:str
-    Password:str
-    UserName:str
-    VendorID:int
+    UserID:int | None= Field(default=0)
+    LoginID:str  | None= Field(default="")
+    Password:str | None= Field(default="")
+    UserName:str | None= Field(default="")
+    VendorID:int | None= Field(default=0)
     
     
     
@@ -191,3 +191,9 @@ class VendorchartDetailInput(BaseModel):
     VendorID:int
     DyChartDetailID:int
     ID:int
+    
+class AddEditVendorPageInput(BaseModel):
+    VendorID:int
+    PageID:int
+    PageName:str
+    SVGPath:str| None=Field(default="")

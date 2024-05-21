@@ -1,5 +1,5 @@
 from DAL import DBConfig
-from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,VendorChartInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
+from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,AddEditVendorPageInput,VendorChartInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
 from Entity.DTO.WsResponse import DynamicResult
 from Service import jwtBearer
 
@@ -102,7 +102,9 @@ def VendorPageDataServiec(input:VendorPageDetDataInput):
                 param=f"@PageID={input.PageID}"
             else:
                 param=f"@PageID=0"
+            print('param',param)
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_MstVendorPage_GetData","VendorPageDataServiec")
+            print('result',result)
         except  Exception as E:                    
             result.HasError=True
             result.Message.append(str(E))
@@ -141,6 +143,31 @@ def VendorAddEdit(input:VendorAddEditInput):
             ID=DBConfig.CDBExecuteNonQuery(input,"WR_mstVendor_AddEdit","VendorAddEdit")
             if(ID>0):
                 result.Message.append("Vendor Detail Fill Sucessfully")
+            else:
+                result.HasError=True
+                result.Message.append("Something Went Wrong.....")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result
+
+def AddEditVendorPage(input:AddEditVendorPageInput):
+    result=DynamicResult()
+    if(input.VendorID<=0):
+        result.Message.append('select Vendor...!')
+    elif(input.PageName==""):
+        result.Message.append('Please Enter Page Name')
+        
+    if(len(result.Message)==0):
+        try:            
+            ID=0
+            ID=DBConfig.CDBExecuteNonQuery(input,"WR_mstVendorPage_AddEdit","AddEditVendorPage")
+            if(ID>0):
+                result.Message.append("Vendor Page Fill Sucessfully")
+            elif(ID==-1):
+                result.Message.append("Page name is already exists .......!")
             else:
                 result.HasError=True
                 result.Message.append("Something Went Wrong.....")
