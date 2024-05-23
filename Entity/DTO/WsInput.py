@@ -202,3 +202,22 @@ class AddEditVendorPageInput(BaseModel):
 class GetUserInput(BaseModel):
     VendorID:int    
     UserID:int
+    
+class DynamicChartDetail(BaseModel):
+    DyChartDetailID:int | None=Field(default=0)
+    DyChartID:int
+    VendorID :int
+    ChartName :str
+    XLabel :str
+    YLabel :str
+    ChartOption :str
+    DefaultChart :str
+    TotalChart :int
+    SrNo :int
+    DependancyID :str
+    XLabelID :str
+    SpName :str
+    
+    
+class AddEditDynamicChartDetailInput(BaseModel):
+   lstChartDetail : list[DynamicChartDetail]

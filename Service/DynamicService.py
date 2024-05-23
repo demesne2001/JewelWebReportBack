@@ -1,5 +1,6 @@
 from DAL import DBConfig
-from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,AddEditVendorPageInput,VendorChartInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
+from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,AddEditVendorPageInput,AddEditDynamicChartDetailInput
+from Entity.DTO.WsInput import VendorChartInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
 from Entity.DTO.WsResponse import DynamicResult
 from Service import jwtBearer
 
@@ -244,5 +245,52 @@ def VendorChartAddEdit(input:VendorChartInput):
         result.HasError=True
     return result
 
+def AddEditDynamicChartDetail(input:AddEditDynamicChartDetailInput):
+    result=DynamicResult()
+    input.lstChartDetail.sort(key=lambda x: x.SrNo, reverse=True)
+    if(len(input.lstChartDetail)>0):
+        if(input.lstChartDetail[0].TotalChart== len(input.lstChartDetail)):
+            for item in input.lstChartDetail:
+                if(item.ChartName==""):
+                    result.Message.append("Please Enter ChartName ") 
+                elif(item.ChartOption==""):
+                    result.Message.append("Please Enter ChartOption ")
+                elif(item.DefaultChart==""):
+                    result.Message.append("Please Enter DefaultChart ")
+                elif(item.SpName==""):
+                    result.Message.append("Please Enter SpName ")
+                elif(item.TotalChart==0):
+                    result.Message.append("Please Enter TotalChart ")
+                elif(item.DyChartID==0):
+                    result.Message.append("Please Enter Parent Chart")
+                elif(item.XLabel==""):
+                    result.Message.append("Please Enter XLabel ")
+                elif(item.XLabelID==""):
+                    result.Message.append("Please Enter XLabelID")
+                elif(item.YLabel==""):
+                    result.Message.append("Please Enter YLabel ")                
+        else:
+            result.Message.append("Please Enter Valid Row ")    
+    else:
+        result.Message.append("Please Enter Chart Data")    
+    if(len(result.Message)==0):
+        try:            
+            ID=0
+            for item in input.lstChartDetail:                
+                ID=DBConfig.CDBExecuteNonQuery(item,"WR_mstVendorDynamicChartDetail_AddEdit","AddEditDynamicChartDetail")
+            if(ID>0):
+                result.Message.append("Detail Chart Fill Sucessfully")
+            elif(ID==-2):
+                result.HasError=True
+                result.Message.append("Please Enter Valid Stored Procedure")
+            else:
+                result.HasError=True
+                result.Message.append("Something Went Wrong.....")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result
 
     
