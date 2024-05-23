@@ -49,3 +49,7 @@ def CommanVendorchartDetail(input:VendorchartDetailInput):
 @Dynamic.post('/AddEditVendorPage')
 def AddEditVendorPage(input:AddEditVendorPageInput):
     return DynamicService.AddEditVendorPage(input)
+
+@Dynamic.post('/GetDynamicDetailChart')
+def GetDynamicDetailChart(input:VendorchartDetailScreenInput):
+    return DynamicService.GetDynamicDetailChart(input)

@@ -136,6 +136,29 @@ def VendorchartDetailScreen(input:VendorchartDetailScreenInput):
         result.HasError=True
     return result
 
+
+def GetDynamicDetailChart(input:VendorchartDetailScreenInput):
+    result=DynamicResult()        
+    if(len(result.Message)==0):
+        try:
+            param=""
+            if(input.VendorID>0):
+                param=f"@VendorID={input.VendorID}"
+            else:
+                param=f"@VendorID={jwtBearer.CVendorID}"
+                
+            if(input.DyChartID>0):
+                param=f"@DyChartID={input.DyChartID}"            
+            
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstVendorDynamicChartDetail_GetDataByID","GetDynamicDetailChart")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result
+
+
 def VendorAddEdit(input:VendorAddEditInput):
     result=DynamicResult()        
     if(len(result.Message)==0):
