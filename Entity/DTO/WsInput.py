@@ -221,3 +221,6 @@ class DynamicChartDetail(BaseModel):
     
 class AddEditDynamicChartDetailInput(BaseModel):
    lstChartDetail : list[DynamicChartDetail]
+   
+class ChartTpeInput(BaseModel):
+   ID : int

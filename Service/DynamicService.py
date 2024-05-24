@@ -1,5 +1,5 @@
 from DAL import DBConfig
-from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,AddEditVendorPageInput,AddEditDynamicChartDetailInput
+from Entity.DTO.WsInput import CommonFilter,VendorAddEditInput,AddEditVendorPageInput,AddEditDynamicChartDetailInput,ChartTpeInput
 from Entity.DTO.WsInput import VendorChartInput,VendorPageDetDataInput,VendorchartDetailScreenInput,VendorchartDetailInput
 from Entity.DTO.WsResponse import DynamicResult
 from Service import jwtBearer
@@ -152,6 +152,19 @@ def GetDynamicDetailChart(input:VendorchartDetailScreenInput):
                 param=f"@DyChartID={input.DyChartID}"            
             
             result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstVendorDynamicChartDetail_GetDataByID","GetDynamicDetailChart")
+        except  Exception as E:                    
+            result.HasError=True
+            result.Message.append(str(E))
+    else:
+        result.HasError=True
+    return result
+
+def GetChartType(input:ChartTpeInput):
+    result=DynamicResult()        
+    if(len(result.Message)==0):
+        try:
+            param=f"@ID={input.ID}"            
+            result.lstResult=DBConfig.CDBExecuteDataReader(param,"WR_mstchartType_GetByYAxis","GetChartType")
         except  Exception as E:                    
             result.HasError=True
             result.Message.append(str(E))
