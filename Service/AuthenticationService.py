@@ -191,8 +191,6 @@ def AddEditUser(input:UserAddEditInput):
         result.Message.append("LoginID is Required")
     elif(input.UserName==''):
         result.Message.append("UserName is Required")
-    elif(input.Password==''):
-        result.Message.append("UserName is Required")
     # elif(input.VendorID<=0):
     #     result.Message.append("VendorID is Required")    
     if(len(result.Message)==0):
