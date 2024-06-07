@@ -3,6 +3,7 @@ from fastapi import FastAPI,Depends
 from fastapi.middleware.cors import CORSMiddleware
 from decouple import config
 from Controller import DashboardCard,DashboardChart,DashboardFilter,CommonController,Login,ScheduleController,DynamicController
+from Controller import StockToSalesController
 import os
 from fastapi.staticfiles import StaticFiles
 from Service.jwtBearer import jwtBearer
@@ -15,6 +16,7 @@ app.include_router(DashboardChart.Chart,prefix='/Chart')
 app.include_router(CommonController.Common,prefix='/Common')
 app.include_router(Login.LoginController,prefix='/Login')
 app.include_router(ScheduleController.Schedule,prefix='/Schedule')
+app.include_router(StockToSalesController.StockToSales,prefix='/StocktoSales', dependencies=[Depends(jwtBearer())])
 app.include_router(DynamicController.Dynamic,prefix='/Dynamic', dependencies=[Depends(jwtBearer())])
 origins=['*']
 app.add_middleware(CORSMiddleware,allow_origins=origins,allow_credentials=True,allow_methods=['*'],allow_headers=['*'],)
