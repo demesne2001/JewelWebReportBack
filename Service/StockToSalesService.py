@@ -12,7 +12,7 @@ def GetStockToSalesChart(input:StockToSalesInput):
     elif(input.Mode ==1):
         if(input.MonthType == ""):
             result.Message.append("Required Field MonthType")
-    if(len(input)==0):        
+    if(len(result.Message)==0):        
         try:
             param=""
             param=DBConfig.spParam(input)
