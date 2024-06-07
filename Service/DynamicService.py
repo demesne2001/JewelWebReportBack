@@ -292,10 +292,7 @@ def AddEditDynamicChartDetail(input:AddEditDynamicChartDetailInput):
             for item in input.lstChartDetail:                
                 ID=DBConfig.CDBExecuteNonQuery(item,"WR_mstVendorDynamicChartDetail_AddEdit","AddEditDynamicChartDetail")
             if(ID>0):
-                result.Message.append("Detail Chart Fill Sucessfully")
-            elif(ID==-2):
-                result.HasError=True
-                result.Message.append("Please Enter Valid Stored Procedure")
+                result.Message.append("Detail Chart Fill Sucessfully")            
             else:
                 result.HasError=True
                 result.Message.append("Something Went Wrong.....")
@@ -306,4 +303,8 @@ def AddEditDynamicChartDetail(input:AddEditDynamicChartDetailInput):
         result.HasError=True
     return result
 
+    
+def UtilityUserPassWordUpdate(VendorID):
+    result=DynamicResult()
+    lstUser=[]
     

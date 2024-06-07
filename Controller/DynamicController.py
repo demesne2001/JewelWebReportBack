@@ -64,3 +64,8 @@ def AddEditDynamicChartDetail(input:AddEditDynamicChartDetailInput):
 @Dynamic.post('/GetChartType')
 def GetChartType(input:ChartTpeInput):
     return DynamicService.GetChartType(input)
+
+
+@Dynamic.post('/UtilityUserPassWordUpdate')
+def UtilityUserPassWordUpdate(VendorID:int):
+    return DynamicService.UtilityUserPassWordUpdate(VendorID)

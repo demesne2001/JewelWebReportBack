@@ -104,6 +104,7 @@ class UserAddEditInput(BaseModel):
     Password:str | None= Field(default="")
     UserName:str | None= Field(default="")
     VendorID:int | None= Field(default=0)
+    IsActive:bool| None= Field(default=True)
     
     
     
@@ -158,8 +159,8 @@ class VendorAddEditInput(BaseModel):
     VendorID:int| None=Field(default=0)
     VendorName:str
     VendorStaticIP:str
-    VendorDBName:str
-    PageName:str
+    VendorDBName:str    
+    IsActive:bool
     
 class VendorChartAddEdit(BaseModel):
     DyChartID:int| None=Field(default=0)
@@ -224,3 +225,17 @@ class AddEditDynamicChartDetailInput(BaseModel):
    
 class ChartTpeInput(BaseModel):
    ID : int
+   
+   
+class StockToSalesInput(BaseModel):
+    FromDate:str
+    ToDate:str
+    StrBranchID:str
+    StrCompanyID:str
+    StrItemID:str
+    StrSubItemID:str
+    MetalType:str
+    ItemGroupID:str
+    MonthType:str
+    Unit:str    
+    Mode:int
