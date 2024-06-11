@@ -230,12 +230,14 @@ class ChartTpeInput(BaseModel):
 class StockToSalesInput(BaseModel):
     FromDate:str
     ToDate:str
-    StrBranchID:str
-    StrCompanyID:str
-    StrItemID:str
-    StrSubItemID:str
-    MetalType:str
-    ItemGroupID:str
-    MonthType:str
-    Unit:str    
+    StrBranchID:str| None=Field(default="")
+    StrCompanyID:str| None=Field(default="")
+    StrItemID:str | None=Field(default="")
+    StrSubItemID:str | None=Field(default="")
+    StrProductID:str | None=Field(default="")
+    MetalType:str | None=Field(default="")
+    ItemGroupID:str | None=Field(default="")
+    MonthType:str | None=Field(default="")
+    Unit:str | None=Field(default="")    
     Mode:int
+    period:str | None=Field(default="")
