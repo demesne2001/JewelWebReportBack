@@ -241,6 +241,7 @@ class StockToSalesInput(BaseModel):
     Unit:str | None=Field(default="")    
     Mode:int
     period:str | None=Field(default="")
+    sort:str | None=Field(default="")
     
 class MinSubitemDeatil(BaseModel):
     FromDate:str
