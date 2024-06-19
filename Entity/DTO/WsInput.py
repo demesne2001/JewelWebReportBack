@@ -249,3 +249,4 @@ class MinSubitemDeatil(BaseModel):
     FromDate:str
     ToDate:str
     SubItemID:int
+    Sort:str | None=Field(default="")
