@@ -119,6 +119,7 @@ class SchedulechartInput(BaseModel):
 class ScheduleDetailInput(BaseModel):
     TravellingTeamID:int
     Mode:int 
+    Sort:str | None=Field(default="a.ScheduleName")
 
 class ScheduleAllDetailInput(BaseModel):
     TravellingTeamID:int | None= Field(default=0)
