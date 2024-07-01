@@ -200,6 +200,7 @@ class AddEditVendorPageInput(BaseModel):
     PageID:int
     PageName:str
     SVGPath:str| None=Field(default="")
+    IsActive:bool
     
     
 class GetUserInput(BaseModel):

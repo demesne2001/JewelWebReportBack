@@ -12,7 +12,7 @@ async def login(input:Login):
 @LoginController.post("/encrypt")
 async def encrypt_value(value: str):
     try:
-        encrypted_value = AuthenticationService.encrypt(value.encode())
+        encrypted_value = AuthenticationService.encryptPass(value)
         return {"encrypted_value": encrypted_value}
     except HTTPException as e:
         raise e
