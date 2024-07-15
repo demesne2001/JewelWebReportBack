@@ -73,6 +73,9 @@ def GetCardValue(input:CardandChartInput):
             param+=f",@Grouping='{input.Grouping}'"
         else:
             param+=f"@Grouping='{input.Grouping}'"
+        if(input.Unity!=''):
+            param+=f",@Unity='{input.Unity}'"
+        
         print('param',param)
         result.lstResult=DBConfig.CDBExecuteDataReader(param,"Wr_Dashboard_GetCard","GetCardValue")
     except  Exception as E:        
